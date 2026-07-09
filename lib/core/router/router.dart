@@ -15,6 +15,7 @@ class AppRouter {
       GoRoute(path: '/login', builder: (_, __) => const LoginPage()),
       GoRoute(path: '/settings', builder: (_, __) => const SettingsPage()),
       GoRoute(path: '/dashboard', builder: (_, __) => const DashboardPage()),
+      //GoRoute(path: '/parcel', builder: (context, state) => ParcelPage()),
       GoRoute(
         path: '/shipment-details',
         builder: (context, state) {
