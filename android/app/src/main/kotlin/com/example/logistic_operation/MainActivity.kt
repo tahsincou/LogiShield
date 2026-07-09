@@ -1,4 +1,4 @@
-package com.example.flutter_mvp_starter
+package com.example.logishield
 
 import io.flutter.embedding.android.FlutterActivity
 

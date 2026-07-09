@@ -1,4 +1,4 @@
-import 'package:flutter_mvp_starter/core/common/repository_result.dart';
+import 'package:logishield/core/common/repository_result.dart';
 
 import '../entities/shipment.dart';
 import '../repository/shipment_repository.dart';

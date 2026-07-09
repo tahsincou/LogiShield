@@ -1,5 +1,5 @@
-name: flutter_mvp_starter
-description: "MVP Starter App"
+name: logishield
+description: "Delayed Parcel Monitor"
 
 publish_to: 'none'
 
@@ -34,6 +34,23 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
   build_runner:
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  web:
+    generate: true
+    image_path: "assets/icon/app_icon.png"
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/splash/logo.jpg
+  android_12:
+    image: assets/splash/logo.jpg
+    color: "#FFFFFF"
 
 
 flutter:

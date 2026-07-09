@@ -30,7 +30,7 @@ Clone the repository:
 
 ```bash
 git clone <repository-url>
-cd flutter_mvp_starter
+cd logishield
 ```
 
 Run the setup:

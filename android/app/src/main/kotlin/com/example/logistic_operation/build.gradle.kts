@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.package:flutter_mvp_starter"
+    namespace = "com.example.package:logishield"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

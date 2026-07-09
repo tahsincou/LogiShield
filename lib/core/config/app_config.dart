@@ -1,4 +1,4 @@
-import 'package:flutter_mvp_starter/core/config/environment.dart';
+import 'package:logishield/core/config/environment.dart';
 
 import '../services/environment_service.dart';
 

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_mvp_starter/core/storage/secure_storage_service.dart';
+import 'package:logishield/core/storage/secure_storage_service.dart';
 
 class AuthInterceptor extends Interceptor {
   final SecureStorageService secureStorage;

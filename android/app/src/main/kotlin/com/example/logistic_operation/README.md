@@ -28,7 +28,7 @@ A Flutter logistics operation template built with Clean Architecture, Riverpod, 
 ```bash
 git clone <repository-url>
 
-cd flutter_mvp_starter
+cd logishield
 
 flutter pub get
 ```

@@ -1,10 +1,10 @@
-import 'package:flutter_mvp_starter/core/common/repository_result.dart';
-import 'package:flutter_mvp_starter/core/network/network_exception.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/data/datasources/shipment_local_data_source.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/data/datasources/shipment_remote_datasource.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment_details.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment_timeline.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/params/create_shipment.dart';
+import 'package:logishield/core/common/repository_result.dart';
+import 'package:logishield/core/network/network_exception.dart';
+import 'package:logishield/features/logistics/shipment/data/datasources/shipment_local_data_source.dart';
+import 'package:logishield/features/logistics/shipment/data/datasources/shipment_remote_datasource.dart';
+import 'package:logishield/features/logistics/shipment/domain/entities/shipment_details.dart';
+import 'package:logishield/features/logistics/shipment/domain/entities/shipment_timeline.dart';
+import 'package:logishield/features/logistics/shipment/domain/params/create_shipment.dart';
 
 import '../../domain/entities/shipment.dart';
 import '../../domain/repository/shipment_repository.dart';

@@ -1,5 +1,5 @@
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment_status.dart';
+import 'package:logishield/features/logistics/shipment/domain/entities/shipment.dart';
+import 'package:logishield/features/logistics/shipment/domain/entities/shipment_status.dart';
 
 class ShipmentState {
   final bool isLoading;

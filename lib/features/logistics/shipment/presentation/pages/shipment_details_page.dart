@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/presentation/notifiers/shipment_details/shipment_details_provider.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/presentation/providers/shipment_notifier.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/presentation/widgets/shipment_timeline_widget.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_spacing.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_card.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_loading.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_section.dart';
-import 'package:flutter_mvp_starter/shared/widgets/confirmation_dialog.dart';
-import 'package:flutter_mvp_starter/shared/widgets/info_tile.dart';
+import 'package:logishield/features/logistics/shipment/presentation/notifiers/shipment_details/shipment_details_provider.dart';
+import 'package:logishield/features/logistics/shipment/presentation/providers/shipment_notifier.dart';
+import 'package:logishield/features/logistics/shipment/presentation/widgets/shipment_timeline_widget.dart';
+import 'package:logishield/shared/theme/app_spacing.dart';
+import 'package:logishield/shared/widgets/app_card.dart';
+import 'package:logishield/shared/widgets/app_loading.dart';
+import 'package:logishield/shared/widgets/app_section.dart';
+import 'package:logishield/shared/widgets/confirmation_dialog.dart';
+import 'package:logishield/shared/widgets/info_tile.dart';
 
 import '../../domain/entities/shipment.dart';
 

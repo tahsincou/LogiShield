@@ -1,5 +1,5 @@
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/repository/shipment_repository.dart';
+import 'package:logishield/features/logistics/shipment/domain/entities/shipment.dart';
+import 'package:logishield/features/logistics/shipment/domain/repository/shipment_repository.dart';
 
 class UpdateShipmentUseCase {
   final ShipmentRepository repository;

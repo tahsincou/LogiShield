@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_text_styles.dart';
+import 'package:logishield/features/logistics/shipment/domain/entities/shipment.dart';
+import 'package:logishield/shared/theme/app_text_styles.dart';
 
 class ShipmentTile extends StatelessWidget {
   final Shipment shipment;

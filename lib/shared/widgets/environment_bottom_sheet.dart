@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/core/config/app_config.dart';
-import 'package:flutter_mvp_starter/core/config/environment.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_text_styles.dart';
+import 'package:logishield/core/config/app_config.dart';
+import 'package:logishield/core/config/environment.dart';
+import 'package:logishield/shared/theme/app_text_styles.dart';
 
 import '../theme/app_spacing.dart';
 
