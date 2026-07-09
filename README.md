@@ -1,8 +1,6 @@
-# Flutter MVP Starter
+# LogiSheild
 
-A production-ready Flutter starter template built with **Clean Architecture**, **Riverpod**, and **Offline-First** principles.
-
-Clone this repository to quickly bootstrap MVPs and production-ready mobile applications without rebuilding the project structure every time.
+Logistics app to detect delayed parcel monitor from multiu couriers
 
 ---
 
@@ -118,20 +116,6 @@ The template already provides the common infrastructure required by most Flutter
 * Shared Widgets
 * Error Handling
 * Repository Pattern
-
----
-
-## Best Suited For
-
-* MVP Applications
-* E-Commerce
-* Logistics
-* School Management
-* Healthcare
-* Inventory
-* Booking Systems
-* SaaS Mobile Clients
-* Internal Business Apps
 
 ---
 

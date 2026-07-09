@@ -25,12 +25,12 @@ final shipmentRepositoryProvider = Provider<ShipmentRepository>((ref) {
 });
 
 //Parcels
-final parcelRepositoryProvider = Provider<ParcelRepository>((ref) {
-  return ParcelRepositoryImpl(
-    remote: ref.read(parcelRemoteDataSourceProvider),
-    local: ref.read(parcelLocalDataSourceProvider),
-  );
-});
+// final parcelRepositoryProvider = Provider<ParcelRepository>((ref) {
+//   return ParcelRepositoryImpl(
+//     remote: ref.read(parcelRemoteDataSourceProvider),
+//     local: ref.read(parcelLocalDataSourceProvider),
+//   );
+// });
 
 //Dashboard
 final dashboardRepositoryProvider = Provider<DashboardRepository>((ref) {
