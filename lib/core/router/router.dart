@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:logishield/features/auth/presentaion/pages/login_page.dart';
 import 'package:logishield/features/dashboard/presentation/pages/dashboard_page.dart';
+import 'package:logishield/features/logistics/parcel/presentation/pages/parcel_page.dart';
 import 'package:logishield/features/logistics/shipment/domain/entities/shipment.dart';
 import 'package:logishield/features/logistics/shipment/presentation/pages/create_shipment_page.dart';
 import 'package:logishield/features/logistics/shipment/presentation/pages/shipment_details_page.dart';
@@ -15,7 +16,7 @@ class AppRouter {
       GoRoute(path: '/login', builder: (_, __) => const LoginPage()),
       GoRoute(path: '/settings', builder: (_, __) => const SettingsPage()),
       GoRoute(path: '/dashboard', builder: (_, __) => const DashboardPage()),
-      //GoRoute(path: '/parcel', builder: (context, state) => ParcelPage()),
+      GoRoute(path: '/parcels', builder: (context, state) => ParcelPage()),
       GoRoute(
         path: '/shipment-details',
         builder: (context, state) {

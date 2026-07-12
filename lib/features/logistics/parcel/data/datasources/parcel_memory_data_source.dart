@@ -1,17 +1,19 @@
-// import 'parcel_local_data_source.dart';
+import 'package:logishield/features/logistics/parcel/data/models/parcel_model.dart';
 
-// class ParcelInMemoryDataSource implements ParcelLocalDataSource {
-//   final List<ParcelModel> _cache = [];
+import 'parcel_local_data_source.dart';
 
-//   @override
-//   Future<List<ParcelModel>> getParcels() async {
-//     return List.unmodifiable(_cache);
-//   }
+class ParcelInMemoryDataSource implements ParcelLocalDataSource {
+  final List<ParcelModel> _cache = [];
 
-//   @override
-//   Future<void> replaceParcels(List<ParcelModel> parcels) async {
-//     _cache
-//       ..clear()
-//       ..addAll(parcels);
-//   }
-// }
+  @override
+  Future<List<ParcelModel>> getParcels() async {
+    return List.unmodifiable(_cache);
+  }
+
+  @override
+  Future<void> replaceParcels(List<ParcelModel> parcels) async {
+    _cache
+      ..clear()
+      ..addAll(parcels);
+  }
+}

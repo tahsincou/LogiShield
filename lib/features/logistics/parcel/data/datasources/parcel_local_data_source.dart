@@ -1,7 +1,7 @@
-// import 'package:logishield/features/logistics/parcel/data/models/parcel_model.dart';
+import 'package:logishield/features/logistics/parcel/data/models/parcel_model.dart';
 
-// abstract class ParcelLocalDataSource {
-//   Future<List<ParcelModel>> getParcels();
+abstract class ParcelLocalDataSource {
+  Future<List<ParcelModel>> getParcels();
 
-//   Future<void> replaceParcels(List<ParcelModel> parcels);
-// }
+  Future<void> replaceParcels(List<ParcelModel> parcels);
+}

@@ -38,16 +38,16 @@ final shipmentLocalDataSourceProvider = Provider<ShipmentLocalDataSource>((
 });
 
 //Parcels
-// final parcelRemoteDataSourceProvider = Provider<ParcelRemoteDataSource>((ref) {
-//   final apiClient = ref.read(apiClientProvider);
+final parcelRemoteDataSourceProvider = Provider<ParcelRemoteDataSource>((ref) {
+  final apiClient = ref.read(apiClientProvider);
 
-//   return ParcelRemoteDataSource(apiClient);
-// });
+  return ParcelRemoteDataSource(apiClient);
+});
 
-// final parcelLocalDataSourceProvider = Provider<ParcelLocalDataSource>((ref) {
-//   if (kIsWeb) {
-//     return ParcelInMemoryDataSource();
-//   }
+final parcelLocalDataSourceProvider = Provider<ParcelLocalDataSource>((ref) {
+  if (kIsWeb) {
+    return ParcelInMemoryDataSource();
+  }
 
-//   return ParcelLocalDataSourceImpl(ref.read(databaseHelperProvider));
-// });
+  return ParcelLocalDataSourceImpl(ref.read(databaseHelperProvider));
+});

@@ -129,7 +129,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     const Text(
-                      'Recent Shipments',
+                      'Recent Parcels',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
