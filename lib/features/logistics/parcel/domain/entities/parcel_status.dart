@@ -1,19 +1,23 @@
 enum ParcelStatusFilter {
   all,
   pending,
+  pickedUp,
+  inTransit,
+  atSortingHub,
+  outForDelivery,
   delivered,
+  returned,
   failed;
 
-  String get label {
-    switch (this) {
-      case ParcelStatusFilter.all:
-        return 'All';
-      case ParcelStatusFilter.pending:
-        return 'Pending';
-      case ParcelStatusFilter.delivered:
-        return 'Delivered';
-      case ParcelStatusFilter.failed:
-        return 'Failed';
-    }
-  }
+  String get label => switch (this) {
+    ParcelStatusFilter.all => 'All',
+    ParcelStatusFilter.pending => 'Pending',
+    ParcelStatusFilter.pickedUp => 'Picked Up',
+    ParcelStatusFilter.inTransit => 'In Transit',
+    ParcelStatusFilter.atSortingHub => 'Sorting Hub',
+    ParcelStatusFilter.outForDelivery => 'Out for Delivery',
+    ParcelStatusFilter.delivered => 'Delivered',
+    ParcelStatusFilter.returned => 'Returned',
+    ParcelStatusFilter.failed => 'Failed',
+  };
 }

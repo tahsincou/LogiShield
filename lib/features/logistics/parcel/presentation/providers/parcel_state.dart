@@ -9,15 +9,17 @@ class ParcelState {
   final String searchQuery;
   final ParcelStatusFilter statusFilter;
   final bool isFromCache;
+  final bool delayedOnly;
 
   const ParcelState({
     this.isLoading = false,
     this.isSubmitting = false,
     this.parcels = const [],
-    this.isFromCache = false,
     this.error,
     this.searchQuery = '',
     this.statusFilter = ParcelStatusFilter.all,
+    this.isFromCache = false,
+    this.delayedOnly = false,
   });
 
   ParcelState copyWith({
@@ -27,6 +29,8 @@ class ParcelState {
     String? error,
     String? searchQuery,
     ParcelStatusFilter? statusFilter,
+    bool? isFromCache,
+    bool? delayedOnly,
   }) {
     return ParcelState(
       isLoading: isLoading ?? this.isLoading,
@@ -35,7 +39,8 @@ class ParcelState {
       error: error,
       searchQuery: searchQuery ?? this.searchQuery,
       statusFilter: statusFilter ?? this.statusFilter,
-      isFromCache: isFromCache,
+      isFromCache: isFromCache ?? this.isFromCache,
+      delayedOnly: delayedOnly ?? this.delayedOnly,
     );
   }
 }

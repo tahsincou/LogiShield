@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logishield/features/dashboard/presentation/providers/dashboard_notifier.dart';
 import 'package:logishield/features/dashboard/presentation/providers/dashboard_provider.dart';
-import 'package:logishield/features/logistics/shipment/presentation/providers/shipment_notifier.dart';
+import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
+import 'package:logishield/features/logistics/parcel/presentation/providers/parcel_notifier.dart';
+import 'package:logishield/features/logistics/parcel/presentation/widgets/parcel_list.dart';
 import 'package:logishield/shared/theme/app_colors.dart';
+import 'package:logishield/shared/theme/app_spacing.dart';
 import 'package:logishield/shared/widgets/app_drawer.dart';
-import 'package:logishield/shared/widgets/app_empty.dart';
+import 'package:logishield/shared/widgets/app_error.dart';
 import 'package:logishield/shared/widgets/app_loading.dart';
-import 'package:logishield/shared/widgets/app_search_field.dart';
 import 'package:logishield/shared/widgets/dashboard_card.dart';
-import 'package:logishield/shared/widgets/shipment_tile.dart';
-import 'package:logishield/shared/widgets/status_filter_chips.dart';
 
-import '../../../../shared/theme/app_spacing.dart';
+import '../../../logistics/parcel/presentation/providers/parcel_state.dart';
+import '../../domain/entities/dashboard_summary.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
@@ -28,170 +28,137 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     super.initState();
 
     Future.microtask(() {
-      ref.read(dashboardNotifierProvider.notifier).loadSummary();
-      ref.read(shipmentNotifierProvider.notifier).loadShipments();
+      ref.read(parcelNotifierProvider.notifier).loadParcels();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(dashboardNotifierProvider);
-    final shipmentState = ref.watch(shipmentNotifierProvider);
+    final parcelState = ref.watch(parcelNotifierProvider);
     final summary = ref.watch(dashboardSummaryProvider);
+
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
-        title: const Text('Parcel Pathai'),
+        title: const Text('LogiShield'),
         actions: [
-          if (state.isFromCache) Icon(Icons.wifi_off, color: AppColors.error),
+          // if (parcelState.isFromCache)
+          //   Icon(Icons.wifi_off_rounded, color: AppColors.error),
         ],
       ),
-      body: state.isLoading
-          ? const Center(child: AppLoading(message: 'Loading dashboard...'))
-          : RefreshIndicator(
-              onRefresh: () async {
-                await ref
-                    .read(shipmentNotifierProvider.notifier)
-                    .loadShipments();
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Overview',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+      body: _buildBody(parcelState: parcelState, summary: summary),
+    );
+  }
 
-                    const SizedBox(height: 16),
+  Widget _buildBody({
+    required ParcelState parcelState,
+    required DashboardSummary summary,
+  }) {
+    if (parcelState.isLoading && parcelState.parcels.isEmpty) {
+      return const AppLoading(message: 'Loading dashboard...');
+    }
 
-                    SizedBox(
-                      height: 150,
-                      child: GridView.count(
-                        controller: ScrollController(),
-                        shrinkWrap: true,
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 4,
-                        mainAxisSpacing: 4,
-                        childAspectRatio: 0.8,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: [
-                          DashboardCard(
-                            title: 'Deliveries',
-                            value: summary.deliveries.toString(),
-                            icon: Icons.local_shipping,
-                            iconColor: Colors.blue.shade700,
-                          ),
-                          DashboardCard(
-                            title: 'Pending',
-                            value: summary.pending.toString(),
-                            icon: Icons.schedule,
-                            iconColor: Colors.orange.shade700,
-                          ),
-                          DashboardCard(
-                            title: 'Completed',
-                            value: summary.completed.toString(),
-                            icon: Icons.check_circle,
-                            iconColor: Colors.green.shade700,
-                          ),
-                          DashboardCard(
-                            title: 'Failed',
-                            value: summary.failed.toString(),
-                            icon: Icons.cancel,
-                            iconColor: Colors.red.shade700,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.lg),
-                    StatusFilterChips(
-                      selected: shipmentState.statusFilter,
-                      onSelected: (status) {
-                        ref
-                            .read(shipmentNotifierProvider.notifier)
-                            .filterShipments(status: status);
-                      },
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    AppSearchField(
-                      hintText: 'Search by tracking ID or customer',
-                      onChanged: (value) {
-                        ref
-                            .read(shipmentNotifierProvider.notifier)
-                            .filterShipments(searchQuery: value);
-                      },
-                    ),
-                    const SizedBox(height: AppSpacing.lg),
-                    const Text(
-                      'Recent Parcels',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    Expanded(
-                      child: RefreshIndicator(
-                        onRefresh: () async {
-                          await ref
-                              .read(shipmentNotifierProvider.notifier)
-                              .loadShipments();
-                        },
-                        child: shipmentState.shipments.isEmpty
-                            ? Center(
-                                child: const AppEmpty(
-                                  title: 'No Shipments',
-                                  message: 'Create your first shipment.',
-                                  icon: Icons.local_shipping_outlined,
-                                ),
-                              )
-                            : ListView.builder(
-                                itemCount: shipmentState.shipments.length,
-                                itemBuilder: (context, index) {
-                                  final shipment =
-                                      shipmentState.shipments[index];
-                                  return ShipmentTile(
-                                    shipment: shipment,
-                                    onTap: () async {
-                                      final result = await context.push<bool>(
-                                        '/shipment-details',
-                                        extra: shipment,
-                                      );
-
-                                      if (result == true) {
-                                        ref
-                                            .read(
-                                              shipmentNotifierProvider.notifier,
-                                            )
-                                            .loadShipments();
-                                      }
-                                    },
-                                  );
-                                },
-                              ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final created = await context.push<bool>('/create-shipment');
-
-          if (created == true && mounted) {
-            ref.read(shipmentNotifierProvider.notifier).loadShipments();
-          }
+    if (parcelState.error != null && parcelState.parcels.isEmpty) {
+      return AppError(
+        message: parcelState.error!,
+        onRetry: () {
+          ref.read(parcelNotifierProvider.notifier).loadParcels();
         },
-        child: const Icon(Icons.add),
+      );
+    }
+
+    final List<Parcel> delayedParcels = parcelState.parcels
+        .where((Parcel parcel) => parcel.isDelayed)
+        .toList();
+
+    return RefreshIndicator(
+      onRefresh: () {
+        return ref.read(parcelNotifierProvider.notifier).loadParcels();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Overview',
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: AppSpacing.md),
+
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              crossAxisSpacing: AppSpacing.sm,
+              mainAxisSpacing: AppSpacing.sm,
+              childAspectRatio: 1.7,
+              children: [
+                InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () {
+                    context.push('/parcels');
+                  },
+                  child: DashboardCard(
+                    title: 'Total Parcels',
+                    value: summary.total.toString(),
+                    icon: Icons.inventory_2_outlined,
+                    iconColor: Colors.black,
+                  ),
+                ),
+                DashboardCard(
+                  title: 'Delayed',
+                  value: summary.delayed.toString(),
+                  icon: Icons.warning_amber_rounded,
+                  iconColor: AppColors.error,
+                ),
+                DashboardCard(
+                  title: 'In Transit',
+                  value: summary.inTransit.toString(),
+                  icon: Icons.local_shipping_outlined,
+                  iconColor: Colors.black,
+                ),
+                DashboardCard(
+                  title: 'Delivered',
+                  value: summary.delivered.toString(),
+                  icon: Icons.check_circle_outline,
+                  iconColor: AppColors.success,
+                ),
+              ],
+            ),
+
+            const SizedBox(height: AppSpacing.lg),
+
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Delayed Parcels',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.push('/parcels');
+                  },
+                  child: const Text('View all'),
+                ),
+                // Text(
+                //   '${delayedParcels.length} requires action',
+                //   style: Theme.of(context).textTheme.bodySmall,
+                // ),
+              ],
+            ),
+
+            const SizedBox(height: AppSpacing.sm),
+
+            Expanded(child: ParcelList(parcels: delayedParcels)),
+          ],
+        ),
       ),
     );
   }

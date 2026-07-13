@@ -1,13 +1,13 @@
 class DashboardSummary {
-  final int deliveries;
-  final int pending;
-  final int completed;
-  final int failed;
+  final int total;
+  final int inTransit;
+  final int delivered;
+  final int delayed;
 
   const DashboardSummary({
-    required this.deliveries,
-    required this.pending,
-    required this.completed,
-    required this.failed,
+    required this.total,
+    required this.inTransit,
+    required this.delivered,
+    required this.delayed,
   });
 }

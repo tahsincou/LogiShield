@@ -17,6 +17,7 @@ class ParcelNotifier extends StateNotifier<ParcelState> {
 
   final Ref ref;
   List<Parcel> _allParcels = [];
+
   Future<void> loadParcels() async {
     state = state.copyWith(isLoading: true);
 
@@ -24,10 +25,59 @@ class ParcelNotifier extends StateNotifier<ParcelState> {
       final parcels = await ref.read(getRecentParcelsUseCaseProvider)();
       _allParcels = parcels.data;
 
-      state = state.copyWith(parcels: parcels.data, isLoading: false);
+      state = state.copyWith(
+        isLoading: false,
+        isFromCache: parcels.isFromCache,
+      );
+
+      filterParcels(
+        searchQuery: state.searchQuery,
+        status: state.statusFilter,
+        delayedOnly: state.delayedOnly,
+      );
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
     }
+  }
+
+  void filterParcels({
+    String? searchQuery,
+    ParcelStatusFilter? status,
+    bool? delayedOnly,
+  }) {
+    final query = searchQuery ?? state.searchQuery;
+    final filter = status ?? state.statusFilter;
+    final showDelayedOnly = delayedOnly ?? state.delayedOnly;
+
+    List<Parcel> filtered = List.of(_allParcels);
+
+    if (query.trim().isNotEmpty) {
+      final normalizedQuery = query.trim().toLowerCase();
+
+      filtered = filtered.where((parcel) {
+        return parcel.trackingId.toLowerCase().contains(normalizedQuery) ||
+            parcel.customerName.toLowerCase().contains(normalizedQuery) ||
+            parcel.phone.toLowerCase().contains(normalizedQuery) ||
+            parcel.carrier.toLowerCase().contains(normalizedQuery);
+      }).toList();
+    }
+
+    if (filter != ParcelStatusFilter.all) {
+      filtered = filtered.where((parcel) {
+        return parcel.status.name == filter.name;
+      }).toList();
+    }
+
+    if (showDelayedOnly) {
+      filtered = filtered.where((parcel) => parcel.isDelayed).toList();
+    }
+
+    state = state.copyWith(
+      parcels: filtered,
+      searchQuery: query,
+      statusFilter: filter,
+      delayedOnly: showDelayedOnly,
+    );
   }
 
   Future<bool> createParcel(CreateParcelRequest request) async {

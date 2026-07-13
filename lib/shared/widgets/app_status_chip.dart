@@ -47,7 +47,7 @@ class AppStatusChip extends StatelessWidget {
           icon: Icons.cancel,
         );
 
-      case 'in transit':
+      case 'intransit':
         return _StatusStyle(
           background: AppColors.info.withValues(alpha: 0.15),
           foreground: AppColors.info,
