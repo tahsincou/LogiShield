@@ -44,7 +44,13 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
         title: Text(context.l10n.appName),
         actions: [
           if (parcelState.isFromCache)
-            Icon(Icons.wifi_off_rounded, color: AppColors.error),
+            IconButton(
+              tooltip: context.l10n.offlineMode,
+              onPressed: () {
+                ref.read(parcelNotifierProvider.notifier).loadParcels();
+              },
+              icon: const Icon(Icons.cloud_off_outlined),
+            ),
         ],
       ),
       body: _buildBody(parcelState: parcelState, summary: summary),

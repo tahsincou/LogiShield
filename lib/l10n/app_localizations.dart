@@ -484,6 +484,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All'**
   String get all;
+
+  /// No description provided for @offlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline mode'**
+  String get offlineMode;
+
+  /// No description provided for @showingCachedData.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing saved parcel data'**
+  String get showingCachedData;
+
+  /// No description provided for @onlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get onlineMode;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

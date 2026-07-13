@@ -212,4 +212,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get all => 'All';
+
+  @override
+  String get offlineMode => 'Offline mode';
+
+  @override
+  String get showingCachedData => 'Showing saved parcel data';
+
+  @override
+  String get onlineMode => 'Online';
+
+  @override
+  String get refresh => 'Refresh';
 }

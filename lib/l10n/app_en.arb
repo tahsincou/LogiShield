@@ -109,5 +109,9 @@
   "outForDelivery": "Out for Delivery",
   "returned": "Returned",
   "failed": "Failed",
-  "all": "All"
+  "all": "All",
+  "offlineMode": "Offline mode",
+  "showingCachedData": "Showing saved parcel data",
+  "onlineMode": "Online",
+  "refresh": "Refresh"
 }

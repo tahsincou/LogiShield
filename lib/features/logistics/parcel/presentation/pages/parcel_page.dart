@@ -7,6 +7,7 @@ import '../../../../../shared/theme/app_spacing.dart';
 import '../../../../../shared/widgets/app_error.dart';
 import '../../../../../shared/widgets/app_loading.dart';
 import '../../../../../shared/widgets/app_search_field.dart';
+import '../../../../../shared/widgets/offline_banner.dart';
 import '../../../../../shared/widgets/status_filter_chips.dart';
 import '../providers/parcel_notifier.dart';
 import '../widgets/parcel_list.dart';
@@ -41,6 +42,13 @@ class _ParcelPageState extends ConsumerState<ParcelPage> {
         },
         child: Column(
           children: [
+            if (state.isFromCache)
+              OfflineBanner(
+                message: context.l10n.showingCachedData,
+                onRefresh: () {
+                  ref.read(parcelNotifierProvider.notifier).loadParcels();
+                },
+              ),
             Padding(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Column(

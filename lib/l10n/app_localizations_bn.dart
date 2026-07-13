@@ -212,4 +212,16 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get all => 'সব';
+
+  @override
+  String get offlineMode => 'অফলাইন মোড';
+
+  @override
+  String get showingCachedData => 'সংরক্ষিত পার্সেল তথ্য দেখানো হচ্ছে';
+
+  @override
+  String get onlineMode => 'অনলাইন';
+
+  @override
+  String get refresh => 'রিফ্রেশ';
 }

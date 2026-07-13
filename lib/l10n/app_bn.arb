@@ -109,5 +109,9 @@
   "outForDelivery": "ডেলিভারির জন্য বের হয়েছে",
   "returned": "ফেরত",
   "failed": "ব্যর্থ",
-  "all": "সব"
+  "all": "সব",
+  "offlineMode": "অফলাইন মোড",
+  "showingCachedData": "সংরক্ষিত পার্সেল তথ্য দেখানো হচ্ছে",
+  "onlineMode": "অনলাইন",
+  "refresh": "রিফ্রেশ"
 }
