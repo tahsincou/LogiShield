@@ -1,17 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
 import 'package:logishield/shared/widgets/app_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logishield/features/logistics/parcel/presentation/providers/parcel_notifier.dart';
+import 'package:logishield/shared/widgets/confirmation_dialog.dart';
+import 'package:logishield/features/logistics/parcel/domain/utils/default_delay_rule.dart';
+import 'package:logishield/features/logistics/parcel/domain/utils/delay_engine.dart';
 
-class ParcelDetailsPage extends StatelessWidget {
+class ParcelDetailsPage extends ConsumerWidget {
   const ParcelDetailsPage({super.key, required this.parcel});
 
   final Parcel parcel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final delayedHours = DelayEngine.delayedHours(
+      parcel: parcel,
+      rules: defaultDelayRules,
+    );
+
+    final elapsedHours = DateTime.now().difference(parcel.lastUpdated).inHours;
     return Scaffold(
-      appBar: AppBar(title: const Text('Parcel Details')),
+      appBar: AppBar(
+        title: Text(context.l10n.parcelDetails),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_outline),
+            onPressed: () async {
+              final confirmed = await showDialog<bool>(
+                context: context,
+                builder: (_) => ConfirmationDialog(
+                  title: context.l10n.deleteParcel,
+                  message: context.l10n.deleteParcelConfirmation,
+                ),
+              );
+
+              if (confirmed != true) return;
+
+              final success = await ref
+                  .read(parcelNotifierProvider.notifier)
+                  .deleteParcel(parcel.id);
+
+              if (!context.mounted) return;
+
+              if (success) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(context.l10n.parcelDeleted)),
+                );
+
+                context.pop(true);
+              }
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -60,44 +104,76 @@ class ParcelDetailsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _Section(
-              title: 'Customer Information',
+              title: context.l10n.customerInformation,
               children: [
                 _InfoRow(
                   icon: Icons.person_outline,
-                  label: 'Customer',
+                  label: context.l10n.customerName,
                   value: parcel.customerName,
                 ),
                 _InfoRow(
                   icon: Icons.phone_outlined,
-                  label: 'Phone',
+                  label: context.l10n.phone,
                   value: parcel.phone,
                 ),
                 _InfoRow(
                   icon: Icons.location_on_outlined,
-                  label: 'Address',
+                  label: context.l10n.address,
                   value: parcel.address,
                 ),
               ],
             ),
             const SizedBox(height: 16),
             _Section(
-              title: 'Parcel Information',
+              title: context.l10n.parcelInformation,
               children: [
                 _InfoRow(
                   icon: Icons.payments_outlined,
-                  label: 'COD Amount',
+                  label: context.l10n.codAmount,
                   value: '৳${parcel.codAmount.toStringAsFixed(0)}',
                 ),
                 _InfoRow(
                   icon: Icons.schedule_outlined,
-                  label: 'Last Updated',
+                  label: context.l10n.lastUpdated,
                   value: _formatDate(parcel.lastUpdated),
                 ),
                 _InfoRow(
                   icon: Icons.warning_amber_outlined,
-                  label: 'Delay Status',
-                  value: parcel.isDelayed ? 'Delayed' : 'On Schedule',
+                  label: context.l10n.delayStatus,
+                  value: parcel.isDelayed
+                      ? context.l10n.delayed
+                      : context.l10n.onSchedule,
                 ),
+              ],
+            ),
+            const SizedBox(height: 16),
+
+            _Section(
+              title: context.l10n.delayAnalysis,
+              children: [
+                _InfoRow(
+                  icon: Icons.timer_outlined,
+                  label: context.l10n.elapsedTime,
+                  value: context.l10n.hours(elapsedHours),
+                ),
+                _InfoRow(
+                  icon: Icons.warning_amber_outlined,
+                  label: context.l10n.delayStatus,
+                  value: parcel.isDelayed
+                      ? context.l10n.delayedByHours(delayedHours)
+                      : context.l10n.onSchedule,
+                ),
+                _InfoRow(
+                  icon: Icons.local_shipping_outlined,
+                  label: context.l10n.carrierRule,
+                  value: _carrierRuleText(context, parcel),
+                ),
+                if (parcel.codAmount >= 5000)
+                  _InfoRow(
+                    icon: Icons.priority_high_rounded,
+                    label: context.l10n.priority,
+                    value: context.l10n.highValueParcel,
+                  ),
               ],
             ),
             const SizedBox(height: 24),
@@ -115,7 +191,7 @@ class ParcelDetailsPage extends StatelessWidget {
                   }
                 },
                 icon: const Icon(Icons.edit_outlined),
-                label: const Text('Edit Parcel'),
+                label: Text(context.l10n.editParcel),
               ),
             ),
           ],
@@ -131,6 +207,20 @@ class ParcelDetailsPage extends StatelessWidget {
     final minute = date.minute.toString().padLeft(2, '0');
 
     return '$day/$month/${date.year} $hour:$minute';
+  }
+
+  String _carrierRuleText(BuildContext context, Parcel parcel) {
+    for (final rule in defaultDelayRules) {
+      if (rule.carrier.toLowerCase() == parcel.carrier.toLowerCase()) {
+        final threshold = parcel.codAmount >= rule.highValueAmount
+            ? rule.highValueThreshold
+            : rule.thresholdHours;
+
+        return context.l10n.hourThreshold(threshold);
+      }
+    }
+
+    return context.l10n.noRuleConfigured;
   }
 }
 

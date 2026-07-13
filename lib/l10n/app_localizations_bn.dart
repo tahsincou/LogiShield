@@ -9,7 +9,7 @@ class AppLocalizationsBn extends AppLocalizations {
   AppLocalizationsBn([String locale = 'bn']) : super(locale);
 
   @override
-  String get appName => 'লজিস্টিক অপারেশন';
+  String get appName => 'লজিশিল্ড';
 
   @override
   String get login => 'লগইন';
@@ -18,7 +18,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dashboard => 'ড্যাশবোর্ড';
 
   @override
-  String get shipments => 'পার্সেল';
+  String get parcels => 'পার্সেল';
 
   @override
   String get settings => 'সেটিংস';
@@ -46,4 +46,170 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get language => 'ভাষা';
+
+  @override
+  String get overview => 'সারসংক্ষেপ';
+
+  @override
+  String get totalParcels => 'মোট পার্সেল';
+
+  @override
+  String get delayed => 'বিলম্বিত';
+
+  @override
+  String get inTransit => 'পরিবহনাধীন';
+
+  @override
+  String get delivered => 'ডেলিভারি সম্পন্ন';
+
+  @override
+  String get delayedParcels => 'বিলম্বিত পার্সেল';
+
+  @override
+  String requiresAction(int count) {
+    return '$countটি পার্সেলে ব্যবস্থা প্রয়োজন';
+  }
+
+  @override
+  String get viewAll => 'সব দেখুন';
+
+  @override
+  String get searchParcelHint => 'ট্র্যাকিং, গ্রাহক, ফোন বা কুরিয়ার খুঁজুন';
+
+  @override
+  String get delayedOnly => 'শুধু বিলম্বিত';
+
+  @override
+  String parcelCount(int count) {
+    return '$countটি পার্সেল';
+  }
+
+  @override
+  String get noParcelsFound => 'কোনো পার্সেল পাওয়া যায়নি';
+
+  @override
+  String get parcelsAppearHere => 'আপনার পার্সেলগুলো এখানে দেখা যাবে।';
+
+  @override
+  String get loadingParcels => 'পার্সেল লোড হচ্ছে...';
+
+  @override
+  String get addParcel => 'পার্সেল যোগ করুন';
+
+  @override
+  String get editParcel => 'পার্সেল সম্পাদনা';
+
+  @override
+  String get createParcel => 'পার্সেল তৈরি করুন';
+
+  @override
+  String get updateParcel => 'পার্সেল হালনাগাদ করুন';
+
+  @override
+  String get parcelDetails => 'পার্সেলের বিস্তারিত';
+
+  @override
+  String get trackingId => 'ট্র্যাকিং আইডি';
+
+  @override
+  String get carrier => 'কুরিয়ার';
+
+  @override
+  String get customerName => 'গ্রাহকের নাম';
+
+  @override
+  String get phone => 'ফোন';
+
+  @override
+  String get address => 'ঠিকানা';
+
+  @override
+  String get codAmount => 'ক্যাশ অন ডেলিভারি';
+
+  @override
+  String get customerInformation => 'গ্রাহকের তথ্য';
+
+  @override
+  String get parcelInformation => 'পার্সেলের তথ্য';
+
+  @override
+  String get lastUpdated => 'সর্বশেষ হালনাগাদ';
+
+  @override
+  String get delayStatus => 'বিলম্বের অবস্থা';
+
+  @override
+  String get onSchedule => 'সময়সূচি অনুযায়ী';
+
+  @override
+  String get delayAnalysis => 'বিলম্ব বিশ্লেষণ';
+
+  @override
+  String get elapsedTime => 'অতিবাহিত সময়';
+
+  @override
+  String hours(int count) {
+    return '$count ঘণ্টা';
+  }
+
+  @override
+  String delayedByHours(int count) {
+    return '$count ঘণ্টা বিলম্বিত';
+  }
+
+  @override
+  String get carrierRule => 'কুরিয়ার নিয়ম';
+
+  @override
+  String hourThreshold(int count) {
+    return '$count ঘণ্টার সীমা';
+  }
+
+  @override
+  String get noRuleConfigured => 'কোনো নিয়ম নির্ধারিত নেই';
+
+  @override
+  String get priority => 'অগ্রাধিকার';
+
+  @override
+  String get highValueParcel => 'উচ্চমূল্যের COD পার্সেল';
+
+  @override
+  String get deleteParcel => 'পার্সেল মুছুন';
+
+  @override
+  String get deleteParcelConfirmation => 'আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?';
+
+  @override
+  String get parcelCreated => 'পার্সেল সফলভাবে তৈরি হয়েছে';
+
+  @override
+  String get parcelUpdated => 'পার্সেল সফলভাবে হালনাগাদ হয়েছে';
+
+  @override
+  String get parcelDeleted => 'পার্সেল সফলভাবে মুছে ফেলা হয়েছে';
+
+  @override
+  String get retry => 'আবার চেষ্টা করুন';
+
+  @override
+  String get pending => 'অপেক্ষমাণ';
+
+  @override
+  String get pickedUp => 'সংগ্রহ করা হয়েছে';
+
+  @override
+  String get sortingHub => 'সর্টিং হাবে';
+
+  @override
+  String get outForDelivery => 'ডেলিভারির জন্য বের হয়েছে';
+
+  @override
+  String get returned => 'ফেরত';
+
+  @override
+  String get failed => 'ব্যর্থ';
+
+  @override
+  String get all => 'সব';
 }

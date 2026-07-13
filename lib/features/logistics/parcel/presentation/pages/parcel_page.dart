@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 
 import '../../../../../shared/theme/app_spacing.dart';
 import '../../../../../shared/widgets/app_error.dart';
@@ -31,7 +33,7 @@ class _ParcelPageState extends ConsumerState<ParcelPage> {
     final state = ref.watch(parcelNotifierProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Parcels')),
+      appBar: AppBar(title: Text(context.l10n.parcels)),
 
       body: RefreshIndicator(
         onRefresh: () {
@@ -44,7 +46,7 @@ class _ParcelPageState extends ConsumerState<ParcelPage> {
               child: Column(
                 children: [
                   AppSearchField(
-                    hintText: 'Search tracking, customer, phone or carrier',
+                    hintText: context.l10n.searchParcelHint,
                     onChanged: (value) {
                       ref
                           .read(parcelNotifierProvider.notifier)
@@ -65,7 +67,7 @@ class _ParcelPageState extends ConsumerState<ParcelPage> {
                   Row(
                     children: [
                       FilterChip(
-                        label: const Text('Delayed only'),
+                        label: Text(context.l10n.delayedOnly),
                         avatar: const Icon(
                           Icons.warning_amber_rounded,
                           size: 18,
@@ -79,7 +81,7 @@ class _ParcelPageState extends ConsumerState<ParcelPage> {
                       ),
                       const Spacer(),
                       Text(
-                        '${state.parcels.length} parcels',
+                        context.l10n.parcelCount(state.parcels.length),
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
@@ -91,12 +93,23 @@ class _ParcelPageState extends ConsumerState<ParcelPage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          final created = await context.push<bool>('/create-parcel');
+
+          if (created == true && mounted) {
+            await ref.read(parcelNotifierProvider.notifier).loadParcels();
+          }
+        },
+        icon: const Icon(Icons.add),
+        label: Text(context.l10n.addParcel),
+      ),
     );
   }
 
   Widget _buildBody(state) {
     if (state.isLoading) {
-      return const AppLoading(message: 'Loading parcels...');
+      return AppLoading(message: context.l10n.loadingParcels);
     }
 
     if (state.error != null) {

@@ -1,64 +1,76 @@
 {
-  "parcels":
-  [{
-    "id": "1",
-    "trackingId": "PTH1001",
-    "carrier": "Pathao",
-    "customerName": "Rahim Uddin",
-    "phone": "01711111111",
-    "address": "Dhanmondi, Dhaka",
-    "codAmount": 1200,
-    "status": "pending",
-    "lastUpdated": "2026-07-09T08:30:00Z",
-    "isDelayed": false
-  },
-  {
-    "id": "2",
-    "trackingId": "SD1002",
-    "carrier": "Steadfast",
-    "customerName": "Karim Hasan",
-    "phone": "01822222222",
-    "address": "Uttara, Dhaka",
-    "codAmount": 4500,
-    "status": "delivered",
-    "lastUpdated": "2026-07-08T03:30:00Z",
-    "isDelayed": true
-  },
-  {
-    "id": "3",
-    "trackingId": "RX1003",
-    "carrier": "RedX",
-    "customerName": "Nusrat Jahan",
-    "phone": "01933333333",
-    "address": "Mirpur, Dhaka",
-    "codAmount": 800,
-    "status": "delivered",
-    "lastUpdated": "2026-07-10T07:00:00Z",
-    "isDelayed": false
-  },
-  {
-    "id": "4",
-    "trackingId": "EC1004",
-    "carrier": "eCourier",
-    "customerName": "Sabbir Ahmed",
-    "phone": "01644444444",
-    "address": "Mohammadpur, Dhaka",
-    "codAmount": 2200,
-    "status": "intransit",
-    "lastUpdated": "2026-07-10T06:15:00Z",
-    "isDelayed": false
-  },
-  {
-    "id": "5",
-    "trackingId": "PTH1005",
-    "carrier": "Pathao",
-    "customerName": "Farhana Akter",
-    "phone": "01755555555",
-    "address": "Narayanganj",
-    "codAmount": 3100,
-    "status": "failed",
-    "lastUpdated": "2026-07-07T05:00:00Z",
-    "isDelayed": true
-  }
-
-]}
+  "parcels": [
+    {
+      "id": "1",
+      "trackingId": "PTH1001",
+      "carrier": "Pathao",
+      "customerName": "Rahim Uddin",
+      "phone": "01711111111",
+      "address": "Dhanmondi, Dhaka",
+      "codAmount": 1200,
+      "status": "pending",
+      "lastUpdated": "2026-07-09T08:30:00Z",
+      "isDelayed": false
+    },
+    {
+      "id": "2",
+      "trackingId": "SD1002",
+      "carrier": "Steadfast",
+      "customerName": "Karim Hasan",
+      "phone": "01822222222",
+      "address": "Uttara, Dhaka",
+      "codAmount": 4500,
+      "status": "delivered",
+      "lastUpdated": "2026-07-08T03:30:00Z",
+      "isDelayed": true
+    },
+    {
+      "id": "3",
+      "trackingId": "RX1003",
+      "carrier": "RedX",
+      "customerName": "Nusrat Jahan",
+      "phone": "01933333333",
+      "address": "Mirpur, Dhaka",
+      "codAmount": 800,
+      "status": "delivered",
+      "lastUpdated": "2026-07-10T07:00:00Z",
+      "isDelayed": false
+    },
+    {
+      "id": "4",
+      "trackingId": "EC1004",
+      "carrier": "eCourier",
+      "customerName": "Sabbir Ahmed",
+      "phone": "01644444444",
+      "address": "Mohammadpur, Dhaka",
+      "codAmount": 2200,
+      "status": "intransit",
+      "lastUpdated": "2026-07-10T06:15:00Z",
+      "isDelayed": false
+    },
+    {
+      "id": "5",
+      "trackingId": "PTH1005",
+      "carrier": "Pathao",
+      "customerName": "Farhana Akter",
+      "phone": "01755555555",
+      "address": "Narayanganj",
+      "codAmount": 3100,
+      "status": "failed",
+      "lastUpdated": "2026-07-07T05:00:00Z",
+      "isDelayed": true
+    },
+    {
+      "id": "7JxL_wR",
+      "trackingId": "ST0098273",
+      "carrier": "Steadfast",
+      "customerName": "Tahsin Hasan",
+      "phone": "09287833",
+      "address": "Uttara",
+      "codAmount": 100,
+      "status": "pending",
+      "lastUpdated": "2026-07-14T00:41:04.828",
+      "isDelayed": false
+    }
+  ]
+}

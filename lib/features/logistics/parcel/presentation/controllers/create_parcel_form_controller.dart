@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 
 class CreateParcelFormController {
-  final parcelTypes = ['Document', 'Electronics', 'Clothing', 'Food', 'Others'];
   final formKey = GlobalKey<FormState>();
 
-  final customerController = TextEditingController();
+  final trackingIdController = TextEditingController();
+  final customerNameController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
-  final weightController = TextEditingController();
-  final deliveryChargeController = TextEditingController();
+  final codAmountController = TextEditingController();
 
-  String? parcelType;
+  String? carrier;
+
+  final carriers = const [
+    'Pathao',
+    'Steadfast',
+    'RedX',
+    'eCourier',
+    'Paperfly',
+  ];
 
   void dispose() {
-    customerController.dispose();
+    trackingIdController.dispose();
+    customerNameController.dispose();
     phoneController.dispose();
     addressController.dispose();
-    weightController.dispose();
-    deliveryChargeController.dispose();
+    codAmountController.dispose();
   }
 }

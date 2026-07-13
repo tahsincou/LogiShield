@@ -1,25 +1,113 @@
 {
   "@@locale": "bn",
 
-  "appName": "লজিস্টিক অপারেশন",
-
+  "appName": "লজিশিল্ড",
   "login": "লগইন",
-
   "dashboard": "ড্যাশবোর্ড",
-
-  "shipments": "পার্সেল",
-
+  "parcels": "পার্সেল",
   "settings": "সেটিংস",
-
   "logout": "লগআউট",
-
   "save": "সংরক্ষণ",
-
   "cancel": "বাতিল",
 
   "theme": "থিম",
   "system": "সিস্টেম",
   "light": "লাইট",
   "dark": "ডার্ক",
-  "language":"ভাষা"
+  "language": "ভাষা",
+
+  "overview": "সারসংক্ষেপ",
+  "totalParcels": "মোট পার্সেল",
+  "delayed": "বিলম্বিত",
+  "inTransit": "পরিবহনাধীন",
+  "delivered": "ডেলিভারি সম্পন্ন",
+  "delayedParcels": "বিলম্বিত পার্সেল",
+  "requiresAction": "{count}টি পার্সেলে ব্যবস্থা প্রয়োজন",
+  "@requiresAction": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "viewAll": "সব দেখুন",
+
+  "searchParcelHint": "ট্র্যাকিং, গ্রাহক, ফোন বা কুরিয়ার খুঁজুন",
+  "delayedOnly": "শুধু বিলম্বিত",
+  "parcelCount": "{count}টি পার্সেল",
+  "@parcelCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noParcelsFound": "কোনো পার্সেল পাওয়া যায়নি",
+  "parcelsAppearHere": "আপনার পার্সেলগুলো এখানে দেখা যাবে।",
+  "loadingParcels": "পার্সেল লোড হচ্ছে...",
+
+  "addParcel": "পার্সেল যোগ করুন",
+  "editParcel": "পার্সেল সম্পাদনা",
+  "createParcel": "পার্সেল তৈরি করুন",
+  "updateParcel": "পার্সেল হালনাগাদ করুন",
+  "parcelDetails": "পার্সেলের বিস্তারিত",
+
+  "trackingId": "ট্র্যাকিং আইডি",
+  "carrier": "কুরিয়ার",
+  "customerName": "গ্রাহকের নাম",
+  "phone": "ফোন",
+  "address": "ঠিকানা",
+  "codAmount": "ক্যাশ অন ডেলিভারি",
+
+  "customerInformation": "গ্রাহকের তথ্য",
+  "parcelInformation": "পার্সেলের তথ্য",
+  "lastUpdated": "সর্বশেষ হালনাগাদ",
+  "delayStatus": "বিলম্বের অবস্থা",
+  "onSchedule": "সময়সূচি অনুযায়ী",
+
+  "delayAnalysis": "বিলম্ব বিশ্লেষণ",
+  "elapsedTime": "অতিবাহিত সময়",
+  "hours": "{count} ঘণ্টা",
+  "@hours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "delayedByHours": "{count} ঘণ্টা বিলম্বিত",
+  "@delayedByHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "carrierRule": "কুরিয়ার নিয়ম",
+  "hourThreshold": "{count} ঘণ্টার সীমা",
+  "@hourThreshold": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noRuleConfigured": "কোনো নিয়ম নির্ধারিত নেই",
+  "priority": "অগ্রাধিকার",
+  "highValueParcel": "উচ্চমূল্যের COD পার্সেল",
+
+  "deleteParcel": "পার্সেল মুছুন",
+  "deleteParcelConfirmation": "আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?",
+  "parcelCreated": "পার্সেল সফলভাবে তৈরি হয়েছে",
+  "parcelUpdated": "পার্সেল সফলভাবে হালনাগাদ হয়েছে",
+  "parcelDeleted": "পার্সেল সফলভাবে মুছে ফেলা হয়েছে",
+
+  "retry": "আবার চেষ্টা করুন",
+  "pending": "অপেক্ষমাণ",
+  "pickedUp": "সংগ্রহ করা হয়েছে",
+  "sortingHub": "সর্টিং হাবে",
+  "outForDelivery": "ডেলিভারির জন্য বের হয়েছে",
+  "returned": "ফেরত",
+  "failed": "ব্যর্থ",
+  "all": "সব"
 }

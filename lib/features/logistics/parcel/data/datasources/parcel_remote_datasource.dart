@@ -49,8 +49,8 @@ class ParcelRemoteDataSource {
     await apiClient.put('/parcels/${parcel.id}', data: model.toJson());
   }
 
-  Future<void> deleteParcel(String trackingId) async {
-    await apiClient.delete('/parcels/$trackingId');
+  Future<void> deleteParcel(String id) async {
+    await apiClient.delete('/parcels/$id');
   }
 
   Future<ParcelDetailsModel> getParcelsDetails(String trackingId) async {

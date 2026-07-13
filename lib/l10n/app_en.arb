@@ -1,26 +1,113 @@
 {
   "@@locale": "en",
 
-  "appName": "Logistic Operation",
-
+  "appName": "LogiShield",
   "login": "Login",
-
   "dashboard": "Dashboard",
-
-  "shipments": "Shipments",
-
+  "parcels": "Parcels",
   "settings": "Settings",
-
   "logout": "Logout",
-
   "save": "Save",
-
   "cancel": "Cancel",
 
   "theme": "Theme",
   "system": "System",
   "light": "Light",
   "dark": "Dark",
-  "language":"Language"
-  
+  "language": "Language",
+
+  "overview": "Overview",
+  "totalParcels": "Total Parcels",
+  "delayed": "Delayed",
+  "inTransit": "In Transit",
+  "delivered": "Delivered",
+  "delayedParcels": "Delayed Parcels",
+  "requiresAction": "{count} requires action",
+  "@requiresAction": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "viewAll": "View all",
+
+  "searchParcelHint": "Search tracking, customer, phone or carrier",
+  "delayedOnly": "Delayed only",
+  "parcelCount": "{count} parcels",
+  "@parcelCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noParcelsFound": "No parcels found",
+  "parcelsAppearHere": "Your parcels will appear here.",
+  "loadingParcels": "Loading parcels...",
+
+  "addParcel": "Add Parcel",
+  "editParcel": "Edit Parcel",
+  "createParcel": "Create Parcel",
+  "updateParcel": "Update Parcel",
+  "parcelDetails": "Parcel Details",
+
+  "trackingId": "Tracking ID",
+  "carrier": "Carrier",
+  "customerName": "Customer Name",
+  "phone": "Phone",
+  "address": "Address",
+  "codAmount": "COD Amount",
+
+  "customerInformation": "Customer Information",
+  "parcelInformation": "Parcel Information",
+  "lastUpdated": "Last Updated",
+  "delayStatus": "Delay Status",
+  "onSchedule": "On Schedule",
+
+  "delayAnalysis": "Delay Analysis",
+  "elapsedTime": "Elapsed Time",
+  "hours": "{count} hours",
+  "@hours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "delayedByHours": "Delayed by {count} hours",
+  "@delayedByHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "carrierRule": "Carrier Rule",
+  "hourThreshold": "{count}-hour threshold",
+  "@hourThreshold": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noRuleConfigured": "No rule configured",
+  "priority": "Priority",
+  "highValueParcel": "High-value COD parcel",
+
+  "deleteParcel": "Delete Parcel",
+  "deleteParcelConfirmation": "Are you sure you want to delete this parcel?",
+  "parcelCreated": "Parcel created successfully",
+  "parcelUpdated": "Parcel updated successfully",
+  "parcelDeleted": "Parcel deleted successfully",
+
+  "retry": "Retry",
+  "pending": "Pending",
+  "pickedUp": "Picked Up",
+  "sortingHub": "Sorting Hub",
+  "outForDelivery": "Out for Delivery",
+  "returned": "Returned",
+  "failed": "Failed",
+  "all": "All"
 }

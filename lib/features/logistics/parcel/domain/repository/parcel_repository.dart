@@ -10,7 +10,7 @@ abstract interface class ParcelRepository {
 
   Future<void> updateParcel(Parcel parcel);
 
-  Future<void> deleteParcel(String trackingId);
+  Future<void> deleteParcel(String id);
 
   Future<ParcelDetails> getParcelDetails(String trackingId);
 }

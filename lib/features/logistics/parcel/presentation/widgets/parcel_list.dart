@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
 import 'package:logishield/shared/widgets/app_card.dart';
 
@@ -7,6 +8,7 @@ import '../../../../../shared/theme/app_colors.dart';
 import '../../../../../shared/theme/app_spacing.dart';
 import '../../../../../shared/widgets/app_empty.dart';
 import '../../../../../shared/widgets/app_status_chip.dart';
+import '../../domain/entities/parcel_status.dart';
 
 class ParcelList extends StatelessWidget {
   const ParcelList({super.key, required this.parcels});
@@ -21,8 +23,8 @@ class ParcelList extends StatelessWidget {
         children: [
           SizedBox(height: AppSpacing.lg),
           AppEmpty(
-            title: 'No parcels found',
-            message: 'Your parcels will appear here.',
+            title: context.l10n.noParcelsFound,
+            message: context.l10n.parcelsAppearHere,
             icon: Icons.inventory_2_outlined,
           ),
         ],
@@ -39,8 +41,15 @@ class ParcelList extends StatelessWidget {
 
         return InkWell(
           borderRadius: BorderRadius.circular(AppSpacing.md),
-          onTap: () {
-            context.push('/parcel-details', extra: parcel);
+          onTap: () async {
+            final changed = await context.push<bool>(
+              '/parcel-details',
+              extra: parcel,
+            );
+
+            if (changed == true && context.mounted) {
+              // The notifier already reloads after update/delete.
+            }
           },
           child: AppCard(
             child: Padding(
@@ -102,7 +111,9 @@ class ParcelList extends StatelessWidget {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      AppStatusChip(status: _formatStatus(parcel.status.name)),
+                      AppStatusChip(
+                        status: _formatStatus(context, parcel.status),
+                      ),
                       const Spacer(),
                       Text(
                         _formatDate(parcel.lastUpdated),
@@ -128,7 +139,26 @@ class ParcelList extends StatelessWidget {
     return '$day/$month/${date.year}';
   }
 
-  String _formatStatus(String value) {
-    return value[0].toUpperCase() + value.substring(1);
+  String _formatStatus(BuildContext context, ParcelStatusFilter status) {
+    switch (status) {
+      case ParcelStatusFilter.all:
+        return context.l10n.all;
+      case ParcelStatusFilter.pending:
+        return context.l10n.pending;
+      case ParcelStatusFilter.pickedUp:
+        return context.l10n.pickedUp;
+      case ParcelStatusFilter.inTransit:
+        return context.l10n.inTransit;
+      case ParcelStatusFilter.atSortingHub:
+        return context.l10n.sortingHub;
+      case ParcelStatusFilter.outForDelivery:
+        return context.l10n.outForDelivery;
+      case ParcelStatusFilter.delivered:
+        return context.l10n.delivered;
+      case ParcelStatusFilter.returned:
+        return context.l10n.returned;
+      case ParcelStatusFilter.failed:
+        return context.l10n.failed;
+    }
   }
 }

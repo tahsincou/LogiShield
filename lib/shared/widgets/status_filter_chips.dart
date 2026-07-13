@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel_status.dart';
 
 class StatusFilterChips extends StatelessWidget {
@@ -20,7 +21,7 @@ class StatusFilterChips extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: ChoiceChip(
-              label: Text(status.label),
+              label: Text(_label(context, status)),
               selected: selected == status,
               onSelected: (_) => onSelected(status),
             ),
@@ -28,5 +29,28 @@ class StatusFilterChips extends StatelessWidget {
         }).toList(),
       ),
     );
+  }
+
+  String _label(BuildContext context, ParcelStatusFilter status) {
+    switch (status) {
+      case ParcelStatusFilter.all:
+        return context.l10n.all;
+      case ParcelStatusFilter.pending:
+        return context.l10n.pending;
+      case ParcelStatusFilter.pickedUp:
+        return context.l10n.pickedUp;
+      case ParcelStatusFilter.inTransit:
+        return context.l10n.inTransit;
+      case ParcelStatusFilter.atSortingHub:
+        return context.l10n.sortingHub;
+      case ParcelStatusFilter.outForDelivery:
+        return context.l10n.outForDelivery;
+      case ParcelStatusFilter.delivered:
+        return context.l10n.delivered;
+      case ParcelStatusFilter.returned:
+        return context.l10n.returned;
+      case ParcelStatusFilter.failed:
+        return context.l10n.failed;
+    }
   }
 }

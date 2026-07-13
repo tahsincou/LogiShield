@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel_status.dart';
 import 'package:logishield/features/logistics/parcel/domain/params/create_parcel.dart';
+import 'package:logishield/features/logistics/parcel/domain/utils/default_delay_rule.dart';
 import 'package:logishield/features/logistics/parcel/presentation/providers/parcel_provider.dart';
 
+import '../../domain/utils/delay_engine.dart';
 import 'parcel_state.dart';
 
 final parcelNotifierProvider =
@@ -19,11 +21,18 @@ class ParcelNotifier extends StateNotifier<ParcelState> {
   List<Parcel> _allParcels = [];
 
   Future<void> loadParcels() async {
-    state = state.copyWith(isLoading: true);
+    state = state.copyWith(isLoading: true, error: null);
 
     try {
       final parcels = await ref.read(getRecentParcelsUseCaseProvider)();
-      _allParcels = parcels.data;
+      _allParcels = parcels.data.map((parcel) {
+        return parcel.copyWith(
+          isDelayed: DelayEngine.isDelayed(
+            parcel: parcel,
+            rules: defaultDelayRules,
+          ),
+        );
+      }).toList();
 
       state = state.copyWith(
         isLoading: false,
@@ -112,49 +121,20 @@ class ParcelNotifier extends StateNotifier<ParcelState> {
     }
   }
 
-  Future<bool> deleteParcel(String trackingId) async {
-    state = state.copyWith(isSubmitting: true);
+  Future<bool> deleteParcel(String id) async {
+    state = state.copyWith(isSubmitting: true, error: null);
 
     try {
-      await ref.read(deleteparcelUseCaseProvider)(trackingId);
-      await loadParcels();
-      state = state.copyWith(isSubmitting: false);
+      await ref.read(deleteparcelUseCaseProvider)(id);
 
+      await loadParcels();
+
+      state = state.copyWith(isSubmitting: false);
       return true;
-    } catch (e) {
-      state = state.copyWith(isSubmitting: false, error: e.toString());
+    } catch (error) {
+      state = state.copyWith(isSubmitting: false, error: error.toString());
 
       return false;
     }
-  }
-
-  void filterShipments({String? searchQuery, ParcelStatusFilter? status}) {
-    final query = searchQuery ?? state.searchQuery;
-    final filter = status ?? state.statusFilter;
-
-    var filtered = _allParcels;
-
-    // Search
-    if (query.trim().isNotEmpty) {
-      filtered = filtered.where((parcel) {
-        final q = query.toLowerCase();
-
-        return parcel.customerName.toLowerCase().contains(q) ||
-            parcel.trackingId.toLowerCase().contains(q);
-      }).toList();
-    }
-
-    // Status
-    if (filter != ParcelStatusFilter.all) {
-      filtered = filtered.where((parcel) {
-        return parcel.status.name.toLowerCase() == filter.name.toLowerCase();
-      }).toList();
-    }
-
-    state = state.copyWith(
-      parcels: filtered,
-      searchQuery: query,
-      statusFilter: filter,
-    );
   }
 }

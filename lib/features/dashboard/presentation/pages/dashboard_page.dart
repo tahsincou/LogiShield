@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/features/dashboard/presentation/providers/dashboard_provider.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
 import 'package:logishield/features/logistics/parcel/presentation/providers/parcel_notifier.dart';
@@ -40,10 +41,10 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     return Scaffold(
       drawer: const AppDrawer(),
       appBar: AppBar(
-        title: const Text('LogiShield'),
+        title: Text(context.l10n.appName),
         actions: [
-          // if (parcelState.isFromCache)
-          //   Icon(Icons.wifi_off_rounded, color: AppColors.error),
+          if (parcelState.isFromCache)
+            Icon(Icons.wifi_off_rounded, color: AppColors.error),
         ],
       ),
       body: _buildBody(parcelState: parcelState, summary: summary),
@@ -55,7 +56,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     required DashboardSummary summary,
   }) {
     if (parcelState.isLoading && parcelState.parcels.isEmpty) {
-      return const AppLoading(message: 'Loading dashboard...');
+      return AppLoading(message: context.l10n.loadingParcels);
     }
 
     if (parcelState.error != null && parcelState.parcels.isEmpty) {
@@ -81,7 +82,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Overview',
+              context.l10n.overview,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
@@ -102,26 +103,26 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                     context.push('/parcels');
                   },
                   child: DashboardCard(
-                    title: 'Total Parcels',
+                    title: context.l10n.totalParcels,
                     value: summary.total.toString(),
                     icon: Icons.inventory_2_outlined,
                     iconColor: Colors.black,
                   ),
                 ),
                 DashboardCard(
-                  title: 'Delayed',
+                  title: context.l10n.delayed,
                   value: summary.delayed.toString(),
                   icon: Icons.warning_amber_rounded,
                   iconColor: AppColors.error,
                 ),
                 DashboardCard(
-                  title: 'In Transit',
+                  title: context.l10n.inTransit,
                   value: summary.inTransit.toString(),
                   icon: Icons.local_shipping_outlined,
                   iconColor: Colors.black,
                 ),
                 DashboardCard(
-                  title: 'Delivered',
+                  title: context.l10n.delivered,
                   value: summary.delivered.toString(),
                   icon: Icons.check_circle_outline,
                   iconColor: AppColors.success,
@@ -135,7 +136,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
               children: [
                 Expanded(
                   child: Text(
-                    'Delayed Parcels',
+                    context.l10n.delayedParcels,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -145,13 +146,13 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                   onPressed: () {
                     context.push('/parcels');
                   },
-                  child: const Text('View all'),
+                  child: Text(context.l10n.viewAll),
                 ),
-                // Text(
-                //   '${delayedParcels.length} requires action',
-                //   style: Theme.of(context).textTheme.bodySmall,
-                // ),
               ],
+            ),
+            Text(
+              context.l10n.requiresAction(delayedParcels.length),
+              style: Theme.of(context).textTheme.bodySmall,
             ),
 
             const SizedBox(height: AppSpacing.sm),

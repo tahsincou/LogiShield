@@ -4,12 +4,10 @@ import 'package:logishield/features/dashboard/presentation/pages/dashboard_page.
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
 import 'package:logishield/features/logistics/parcel/presentation/pages/parcel_details_page.dart';
 import 'package:logishield/features/logistics/parcel/presentation/pages/parcel_page.dart';
-import 'package:logishield/features/logistics/parcel/presentation/widgets/parcel_list.dart';
-import 'package:logishield/features/logistics/shipment/domain/entities/shipment.dart';
-import 'package:logishield/features/logistics/shipment/presentation/pages/create_shipment_page.dart';
-import 'package:logishield/features/logistics/shipment/presentation/pages/shipment_details_page.dart';
 import 'package:logishield/features/settings/settings_page.dart';
 import 'package:logishield/features/splash/presentation/pages/splash_page.dart';
+
+import '../../features/logistics/parcel/presentation/pages/parcel_form_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -17,37 +15,25 @@ class AppRouter {
     routes: [
       GoRoute(path: '/splash', builder: (_, __) => const SplashPage()),
       GoRoute(path: '/login', builder: (_, __) => const LoginPage()),
-      GoRoute(path: '/settings', builder: (_, __) => const SettingsPage()),
       GoRoute(path: '/dashboard', builder: (_, __) => const DashboardPage()),
       GoRoute(path: '/parcels', builder: (_, __) => const ParcelPage()),
       GoRoute(
         path: '/parcel-details',
-        builder: (context, state) {
-          final parcel = state.extra as Parcel;
-
-          return ParcelDetailsPage(parcel: parcel);
+        builder: (_, state) {
+          return ParcelDetailsPage(parcel: state.extra as Parcel);
         },
       ),
       GoRoute(
-        path: '/shipment-details',
-        builder: (context, state) {
-          final shipment = state.extra as Shipment;
-
-          return ShipmentDetailsPage(shipment: shipment);
-        },
+        path: '/create-parcel',
+        builder: (_, __) => const ParcelFormPage(),
       ),
       GoRoute(
-        path: '/create-shipment',
-        builder: (context, state) => const ShipmentFormPage(),
-      ),
-      GoRoute(
-        path: '/edit-shipment',
-        builder: (context, state) {
-          final shipment = state.extra as Shipment;
-
-          return ShipmentFormPage(shipment: shipment);
+        path: '/edit-parcel',
+        builder: (_, state) {
+          return ParcelFormPage(parcel: state.extra as Parcel);
         },
       ),
+      GoRoute(path: '/settings', builder: (_, __) => const SettingsPage()),
     ],
   );
 }

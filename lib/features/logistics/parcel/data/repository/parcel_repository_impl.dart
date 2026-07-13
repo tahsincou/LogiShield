@@ -42,8 +42,8 @@ class ParcelRepositoryImpl implements ParcelRepository {
   }
 
   @override
-  Future<void> deleteParcel(String trackingId) {
-    return remote.deleteParcel(trackingId);
+  Future<void> deleteParcel(String id) {
+    return remote.deleteParcel(id);
   }
 
   @override
