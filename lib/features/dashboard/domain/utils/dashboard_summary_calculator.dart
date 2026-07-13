@@ -1,26 +1,20 @@
+import 'package:logishield/features/dashboard/domain/entities/dashboard_summary.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
-import 'package:logishield/features/logistics/parcel/domain/entities/parcel_status.dart';
 
-import '../entities/dashboard_summary.dart';
+import '../../../logistics/parcel/domain/entities/parcel_status.dart';
 
-class DashboardSummaryCalculator {
-  const DashboardSummaryCalculator._();
-
-  static DashboardSummary calculate(List<Parcel> parcels) {
-    return DashboardSummary(
-      total: parcels.length,
-      inTransit: parcels
-          .where(
-            (parcel) =>
-                parcel.status == ParcelStatusFilter.inTransit ||
-                parcel.status == ParcelStatusFilter.pending ||
-                parcel.status == ParcelStatusFilter.failed,
-          )
-          .length,
-      delivered: parcels
-          .where((parcel) => parcel.status == ParcelStatusFilter.delivered)
-          .length,
-      delayed: parcels.where((parcel) => parcel.isDelayed).length,
-    );
-  }
+DashboardSummary calculate(List<Parcel> parcels) {
+  return DashboardSummary(
+    total: parcels.length,
+    inTransit: parcels.where((parcel) {
+      return parcel.status == ParcelStatusFilter.pickedUp ||
+          parcel.status == ParcelStatusFilter.inTransit ||
+          parcel.status == ParcelStatusFilter.atSortingHub ||
+          parcel.status == ParcelStatusFilter.outForDelivery;
+    }).length,
+    delivered: parcels.where((parcel) {
+      return parcel.status == ParcelStatusFilter.delivered;
+    }).length,
+    delayed: parcels.where((parcel) => parcel.isDelayed).length,
+  );
 }

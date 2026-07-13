@@ -3,6 +3,8 @@ import 'package:logishield/core/providers/repository_providers.dart';
 import 'package:logishield/features/dashboard/domain/utils/dashboard_summary_calculator.dart';
 import 'package:logishield/features/logistics/parcel/domain/repository/parcel_repository.dart';
 
+import '../../domain/utils/dashboard_summary_calculator.dart'
+    as DashboardSummary;
 import 'dashboard_state.dart';
 
 final dashboardNotifierProvider =
@@ -21,7 +23,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     try {
       final result = await _parcelRepository.getRecentParcels();
 
-      final summary = DashboardSummaryCalculator.calculate(result.data);
+      final summary = DashboardSummary.calculate(result.data);
 
       state = state.copyWith(
         isLoading: false,
