@@ -11,15 +11,17 @@ class AppCard extends StatelessWidget {
   });
 
   final Widget child;
-
   final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
+    final theme = Theme.of(context);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.cardColor,
         borderRadius: BorderRadius.circular(AppRadius.md),
+        border: Border.all(color: theme.dividerColor),
       ),
       child: Padding(padding: padding, child: child),
     );

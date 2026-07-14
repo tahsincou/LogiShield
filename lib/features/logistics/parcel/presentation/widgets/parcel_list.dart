@@ -2,26 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
+import 'package:logishield/features/logistics/parcel/domain/entities/parcel_status.dart';
+import 'package:logishield/shared/theme/app_spacing.dart';
 import 'package:logishield/shared/widgets/app_card.dart';
-
-import '../../../../../shared/theme/app_colors.dart';
-import '../../../../../shared/theme/app_spacing.dart';
-import '../../../../../shared/widgets/app_empty.dart';
-import '../../../../../shared/widgets/app_status_chip.dart';
-import '../../domain/entities/parcel_status.dart';
+import 'package:logishield/shared/widgets/app_empty.dart';
+import 'package:logishield/shared/widgets/app_status_chip.dart';
 
 class ParcelList extends StatelessWidget {
-  const ParcelList({super.key, required this.parcels});
+  const ParcelList({
+    super.key,
+    required this.parcels,
+    this.padding = const EdgeInsets.all(AppSpacing.md),
+  });
 
   final List<Parcel> parcels;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     if (parcels.isEmpty) {
       return ListView(
-        physics: AlwaysScrollableScrollPhysics(),
+        padding: padding,
+        physics: const AlwaysScrollableScrollPhysics(),
         children: [
-          SizedBox(height: AppSpacing.lg),
+          const SizedBox(height: 100),
           AppEmpty(
             title: context.l10n.noParcelsFound,
             message: context.l10n.parcelsAppearHere,
@@ -32,7 +39,7 @@ class ParcelList extends StatelessWidget {
     }
 
     return ListView.separated(
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: padding,
       physics: const AlwaysScrollableScrollPhysics(),
       itemCount: parcels.length,
       separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
@@ -40,91 +47,114 @@ class ParcelList extends StatelessWidget {
         final parcel = parcels[index];
 
         return InkWell(
-          borderRadius: BorderRadius.circular(AppSpacing.md),
-          onTap: () async {
-            final changed = await context.push<bool>(
-              '/parcel-details',
-              extra: parcel,
-            );
-
-            if (changed == true && context.mounted) {
-              // The notifier already reloads after update/delete.
-            }
+          borderRadius: BorderRadius.circular(14),
+          onTap: () {
+            context.push('/parcel-details', extra: parcel);
           },
           child: AppCard(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          parcel.trackingId,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.w700),
-                        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 44,
+                      width: 44,
+                      decoration: BoxDecoration(
+                        color: colors.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      if (parcel.isDelayed)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 6,
+                      child: Icon(
+                        Icons.local_shipping_outlined,
+                        color: colors.onSurface,
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            parcel.trackingId,
+                            style: theme.textTheme.titleMedium,
                           ),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(AppSpacing.sm),
-                          ),
-                          child: const Text(
-                            'Delayed',
-                            style: TextStyle(
-                              color: AppColors.warning,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                          const SizedBox(height: 3),
+                          Text(
+                            parcel.customerName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colors.onSurfaceVariant,
                             ),
                           ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(
-                    parcel.customerName,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Row(
-                    children: [
-                      const Icon(Icons.local_shipping_outlined, size: 18),
-                      const SizedBox(width: AppSpacing.sm),
-                      Text(parcel.carrier),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      const Icon(Icons.payments_outlined, size: AppSpacing.md),
-                      const SizedBox(width: 6),
-                      Text('COD ৳${parcel.codAmount.toStringAsFixed(0)}'),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      AppStatusChip(
-                        status: _formatStatus(context, parcel.status),
+                        ],
                       ),
-                      const Spacer(),
-                      Text(
-                        _formatDate(parcel.lastUpdated),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey.shade600,
+                    ),
+
+                    if (parcel.isDelayed)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 9,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colors.errorContainer,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          context.l10n.delayed,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: colors.onErrorContainer,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+
+                const SizedBox(height: AppSpacing.md),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: _MetaItem(
+                        icon: Icons.business_outlined,
+                        value: parcel.carrier,
+                      ),
+                    ),
+                    Expanded(
+                      child: _MetaItem(
+                        icon: Icons.payments_outlined,
+                        value: '৳${parcel.codAmount.toStringAsFixed(0)}',
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: AppSpacing.md),
+
+                Row(
+                  children: [
+                    AppStatusChip(
+                      status: _formatStatus(context, parcel.status),
+                    ),
+                    const Spacer(),
+                    Text(
+                      _formatDate(parcel.lastUpdated),
+                      style: theme.textTheme.bodySmall,
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(
+                      Icons.chevron_right,
+                      size: 18,
+                      color: colors.onSurfaceVariant,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         );
@@ -160,5 +190,31 @@ class ParcelList extends StatelessWidget {
       case ParcelStatusFilter.failed:
         return context.l10n.failed;
     }
+  }
+}
+
+class _MetaItem extends StatelessWidget {
+  const _MetaItem({required this.icon, required this.value});
+
+  final IconData icon;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        Icon(icon, size: 17, color: colors.onSurfaceVariant),
+        const SizedBox(width: 6),
+        Flexible(
+          child: Text(
+            value,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ),
+      ],
+    );
   }
 }
