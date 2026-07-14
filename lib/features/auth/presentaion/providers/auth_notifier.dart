@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:logishield/features/auth/data/dto/login_request.dart';
@@ -14,16 +15,30 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   final Ref ref;
 
-  Future<void> login({required String email, required String password}) async {
-    state = state.copyWith(isLoading: true);
+  Future<bool> login({required String email, required String password}) async {
+    state = state.copyWith(isLoading: true, error: null);
 
     try {
-      await ref.read(loginUseCaseProvider)(
+      final user = await ref.read(loginUseCaseProvider)(
         LoginRequest(email: email, password: password),
       );
-      state = state.copyWith(isLoading: false);
+
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: true,
+        user: user,
+        error: null,
+      );
+
+      return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, error: e.toString());
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: false,
+        error: e.toString(),
+      );
+      debugPrint(e.toString());
+      return false;
     }
   }
 

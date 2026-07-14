@@ -5,9 +5,6 @@ import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/shared/theme/app_spacing.dart';
 import 'package:logishield/shared/widgets/app_button.dart';
 import 'package:logishield/shared/widgets/app_text_field.dart';
-import 'package:logishield/shared/widgets/environment_badge.dart';
-import 'package:logishield/shared/widgets/environment_bottom_sheet.dart';
-
 import '../providers/auth_notifier.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -20,9 +17,9 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _emailController = TextEditingController();
+  final _emailController = TextEditingController(text: "demo@logishield.com");
 
-  final _passwordController = TextEditingController();
+  final _passwordController = TextEditingController(text: "password");
 
   bool _obscurePassword = true;
 
@@ -40,7 +37,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       return;
     }
 
-    await ref
+    final success = await ref
         .read(authNotifierProvider.notifier)
         .login(
           email: _emailController.text.trim(),
@@ -49,9 +46,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     if (!mounted) return;
 
-    final authState = ref.read(authNotifierProvider);
-
-    if (authState.error != null) {
+    if (success) {
       context.go('/dashboard');
     }
   }
