@@ -6,21 +6,11 @@ import 'package:logishield/features/dashboard/data/repository/dashboard_reposito
 import 'package:logishield/features/dashboard/domain/repository/dashboard_repository.dart';
 import 'package:logishield/features/logistics/parcel/data/repository/parcel_repository_impl.dart';
 import 'package:logishield/features/logistics/parcel/domain/repository/parcel_repository.dart';
-import 'package:logishield/features/logistics/shipment/data/repository/shipment_repository_impl.dart';
-import 'package:logishield/features/logistics/shipment/domain/repository/shipment_repository.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepositoryImpl(
     ref.read(authRemoteDataSourceProvider),
     ref.read(secureStorageServiceProvider),
-  );
-});
-
-//Shipments
-final shipmentRepositoryProvider = Provider<ShipmentRepository>((ref) {
-  return ShipmentRepositoryImpl(
-    remote: ref.read(shipmentRemoteDataSourceProvider),
-    local: ref.read(shipmentLocalDataSourceProvider),
   );
 });
 

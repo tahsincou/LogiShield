@@ -197,6 +197,7 @@ class AppTheme {
       textTheme: textTheme,
 
       canvasColor: scaffoldBackground,
+      // ignore: deprecated_member_use
       dialogBackgroundColor: cardColor,
       disabledColor: isDark ? const Color(0xFF555555) : const Color(0xFFAAAAAA),
 

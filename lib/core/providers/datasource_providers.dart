@@ -8,33 +8,10 @@ import 'package:logishield/features/logistics/parcel/data/datasources/parcel_loc
 import 'package:logishield/features/logistics/parcel/data/datasources/parcel_local_data_source_impl.dart';
 import 'package:logishield/features/logistics/parcel/data/datasources/parcel_memory_data_source.dart';
 import 'package:logishield/features/logistics/parcel/data/datasources/parcel_remote_datasource.dart';
-import 'package:logishield/features/logistics/shipment/data/datasources/shipment_local_data_source.dart';
-import 'package:logishield/features/logistics/shipment/data/datasources/shipment_local_data_source_impl.dart';
-import 'package:logishield/features/logistics/shipment/data/datasources/shipment_memory_data_source.dart';
-import 'package:logishield/features/logistics/shipment/data/datasources/shipment_remote_datasource.dart';
 
 //Auth
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
   return AuthRemoteDataSourceImpl(ref.read(apiClientProvider));
-});
-
-//Shipments
-final shipmentRemoteDataSourceProvider = Provider<ShipmentRemoteDataSource>((
-  ref,
-) {
-  final apiClient = ref.read(apiClientProvider);
-
-  return ShipmentRemoteDataSource(apiClient);
-});
-
-final shipmentLocalDataSourceProvider = Provider<ShipmentLocalDataSource>((
-  ref,
-) {
-  if (kIsWeb) {
-    return ShipmentInMemoryDataSource();
-  }
-
-  return ShipmentLocalDataSourceImpl(ref.read(databaseHelperProvider));
 });
 
 //Parcels

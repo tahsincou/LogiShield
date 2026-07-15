@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:logishield/core/providers/repository_providers.dart';
-import 'package:logishield/features/dashboard/domain/utils/dashboard_summary_calculator.dart';
 import 'package:logishield/features/logistics/parcel/domain/repository/parcel_repository.dart';
 
 import '../../domain/utils/dashboard_summary_calculator.dart'
+    // ignore: library_prefixes
     as DashboardSummary;
 import 'dashboard_state.dart';
 
