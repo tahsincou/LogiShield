@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logishield/core/config/app_config.dart';
 import 'package:logishield/core/config/environment.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/shared/theme/app_text_styles.dart';
 
 import '../theme/app_spacing.dart';
@@ -23,7 +24,7 @@ Future<bool?> showEnvironmentBottomSheet(BuildContext context) async {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Environment', style: AppTextStyles.heading),
+                Text(context.l10n.address, style: AppTextStyles.heading),
 
                 SizedBox(height: AppSpacing.lg),
 

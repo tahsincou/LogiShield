@@ -56,22 +56,26 @@ class ParcelRepositoryImpl implements ParcelRepository {
       parcel: parcel,
       timeline: [
         ParcelTimeline(
-          title: 'Created',
+          title: 'created',
           completed: true,
           time: DateTime(2026, 7, 4, 9, 0),
         ),
         ParcelTimeline(
-          title: 'Picked Up',
+          title: 'pickedUp',
           completed: true,
           time: DateTime(2026, 7, 4, 10, 30),
         ),
         ParcelTimeline(
-          title: 'Arrived at Hub',
+          title: 'arrivedAtHub',
           completed: true,
           time: DateTime(2026, 7, 4, 13, 20),
         ),
-        ParcelTimeline(title: 'Out for Delivery', completed: false, time: null),
-        ParcelTimeline(title: 'Delivered', completed: false, time: null),
+        const ParcelTimeline(
+          title: 'outForDelivery',
+          completed: false,
+          time: null,
+        ),
+        const ParcelTimeline(title: 'delivered', completed: false, time: null),
       ],
     );
   }

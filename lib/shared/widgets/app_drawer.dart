@@ -13,19 +13,31 @@ class AppDrawer extends ConsumerWidget {
       child: SafeArea(
         child: Column(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text("Parcel Pathai"),
-              accountEmail: Text("user@logistics.com"),
-              currentAccountPicture: CircleAvatar(child: Icon(Icons.person)),
+            UserAccountsDrawerHeader(
+              margin: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                border: Border(
+                  bottom: BorderSide(color: Theme.of(context).dividerColor),
+                ),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                child: Icon(
+                  Icons.person_outline,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+              accountName: Text(
+                "Parcel Pathai",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              accountEmail: Text(
+                "user@logistics.com",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
             ),
 
-            // ListTile(
-            //   leading: const Icon(Icons.dashboard),
-            //   title: const Text("Dashboard"),
-            //   onTap: () {
-            //     context.go('/dashboard');
-            //   },
-            // ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: Text(context.l10n.settings),

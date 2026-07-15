@@ -62,8 +62,7 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,18 +82,17 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('bn'),
-    Locale('en'),
+    Locale('en')
   ];
 
   /// No description provided for @appName.
@@ -305,7 +302,7 @@ abstract class AppLocalizations {
   /// No description provided for @customerName.
   ///
   /// In en, this message translates to:
-  /// **'Customer Name'**
+  /// **'Customer'**
   String get customerName;
 
   /// No description provided for @phone.
@@ -410,6 +407,12 @@ abstract class AppLocalizations {
   /// **'High-value COD parcel'**
   String get highValueParcel;
 
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
   /// No description provided for @deleteParcel.
   ///
   /// In en, this message translates to:
@@ -511,10 +514,147 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Refresh'**
   String get refresh;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get invalidEmail;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @loginSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed parcel monitoring for faster operational action.'**
+  String get loginSubtitle;
+
+  /// No description provided for @loginInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your account details to continue.'**
+  String get loginInstruction;
+
+  /// No description provided for @delayedParcelMonitor.
+  ///
+  /// In en, this message translates to:
+  /// **'Delayed Parcel Monitor'**
+  String get delayedParcelMonitor;
+
+  /// No description provided for @invalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password.'**
+  String get invalidCredentials;
+
+  /// No description provided for @requestTimedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'The request timed out. Please try again.'**
+  String get requestTimedOut;
+
+  /// No description provided for @connectionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to connect to the server. Check your connection.'**
+  String get connectionFailed;
+
+  /// No description provided for @genericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get genericError;
+
+  /// No description provided for @timelineCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get timelineCreated;
+
+  /// No description provided for @timelinePickedUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Picked Up'**
+  String get timelinePickedUp;
+
+  /// No description provided for @timelineArrivedAtHub.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived at Hub'**
+  String get timelineArrivedAtHub;
+
+  /// No description provided for @timelineOutForDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'Out for Delivery'**
+  String get timelineOutForDelivery;
+
+  /// No description provided for @timelineDelivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get timelineDelivered;
+
+  /// No description provided for @pendingStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pendingStatus;
+
+  /// No description provided for @carrierPathao.
+  ///
+  /// In en, this message translates to:
+  /// **'Pathao'**
+  String get carrierPathao;
+
+  /// No description provided for @carrierSteadfast.
+  ///
+  /// In en, this message translates to:
+  /// **'Steadfast'**
+  String get carrierSteadfast;
+
+  /// No description provided for @carrierRedX.
+  ///
+  /// In en, this message translates to:
+  /// **'RedX'**
+  String get carrierRedX;
+
+  /// No description provided for @carrierECourier.
+  ///
+  /// In en, this message translates to:
+  /// **'eCourier'**
+  String get carrierECourier;
+
+  /// No description provided for @carrierPaperfly.
+  ///
+  /// In en, this message translates to:
+  /// **'Paperfly'**
+  String get carrierPaperfly;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -523,26 +663,25 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['bn', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['bn', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'bn':
-      return AppLocalizationsBn();
-    case 'en':
-      return AppLocalizationsEn();
+    case 'bn': return AppLocalizationsBn();
+    case 'en': return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

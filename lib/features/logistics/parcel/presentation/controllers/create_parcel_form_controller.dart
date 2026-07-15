@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/carrier.dart';
+
 class CreateParcelFormController {
   final formKey = GlobalKey<FormState>();
 
@@ -9,15 +11,9 @@ class CreateParcelFormController {
   final addressController = TextEditingController();
   final codAmountController = TextEditingController();
 
-  String? carrier;
+  Carrier? carrier;
 
-  final carriers = const [
-    'Pathao',
-    'Steadfast',
-    'RedX',
-    'eCourier',
-    'Paperfly',
-  ];
+  final carriers = Carrier.values;
 
   void dispose() {
     trackingIdController.dispose();

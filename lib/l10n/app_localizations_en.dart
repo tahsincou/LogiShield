@@ -115,7 +115,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get carrier => 'Carrier';
 
   @override
-  String get customerName => 'Customer Name';
+  String get customerName => 'Customer';
 
   @override
   String get phone => 'Phone';
@@ -175,11 +175,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get highValueParcel => 'High-value COD parcel';
 
   @override
+  String get delete => 'Delete';
+
+  @override
   String get deleteParcel => 'Delete Parcel';
 
   @override
-  String get deleteParcelConfirmation =>
-      'Are you sure you want to delete this parcel?';
+  String get deleteParcelConfirmation => 'Are you sure you want to delete this parcel?';
 
   @override
   String get parcelCreated => 'Parcel created successfully';
@@ -225,4 +227,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get refresh => 'Refresh';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get emailRequired => 'Email is required';
+
+  @override
+  String get invalidEmail => 'Enter a valid email';
+
+  @override
+  String get passwordRequired => 'Password is required';
+
+  @override
+  String get loginSubtitle => 'Delayed parcel monitoring for faster operational action.';
+
+  @override
+  String get loginInstruction => 'Enter your account details to continue.';
+
+  @override
+  String get delayedParcelMonitor => 'Delayed Parcel Monitor';
+
+  @override
+  String get invalidCredentials => 'Invalid email or password.';
+
+  @override
+  String get requestTimedOut => 'The request timed out. Please try again.';
+
+  @override
+  String get connectionFailed => 'Unable to connect to the server. Check your connection.';
+
+  @override
+  String get genericError => 'Something went wrong. Please try again.';
+
+  @override
+  String get timelineCreated => 'Created';
+
+  @override
+  String get timelinePickedUp => 'Picked Up';
+
+  @override
+  String get timelineArrivedAtHub => 'Arrived at Hub';
+
+  @override
+  String get timelineOutForDelivery => 'Out for Delivery';
+
+  @override
+  String get timelineDelivered => 'Delivered';
+
+  @override
+  String get pendingStatus => 'Pending';
+
+  @override
+  String get carrierPathao => 'Pathao';
+
+  @override
+  String get carrierSteadfast => 'Steadfast';
+
+  @override
+  String get carrierRedX => 'RedX';
+
+  @override
+  String get carrierECourier => 'eCourier';
+
+  @override
+  String get carrierPaperfly => 'Paperfly';
 }

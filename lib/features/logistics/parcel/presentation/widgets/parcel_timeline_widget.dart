@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logishield/core/locale/locale_extension.dart';
 import '../../domain/entities/parcel_timeline.dart';
 
 class ParcelTimelineWidget extends StatelessWidget {
@@ -58,15 +59,17 @@ class _TimelineItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.title,
-                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    _localizedTitle(context, item.title),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
 
                   const SizedBox(height: 4),
 
                   Text(
-                    item.time == null ? 'Pending' : _format(item.time!),
-                    style: TextStyle(color: Colors.grey.shade600),
+                    item.time == null
+                        ? context.l10n.pendingStatus
+                        : _format(item.time!),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -81,5 +84,27 @@ class _TimelineItem extends StatelessWidget {
     return '${date.day}/${date.month}/${date.year} '
         '${date.hour.toString().padLeft(2, '0')}:'
         '${date.minute.toString().padLeft(2, '0')}';
+  }
+
+  String _localizedTitle(BuildContext context, String title) {
+    switch (title) {
+      case 'created':
+        return context.l10n.timelineCreated;
+
+      case 'pickedUp':
+        return context.l10n.timelinePickedUp;
+
+      case 'arrivedAtHub':
+        return context.l10n.timelineArrivedAtHub;
+
+      case 'outForDelivery':
+        return context.l10n.timelineOutForDelivery;
+
+      case 'delivered':
+        return context.l10n.timelineDelivered;
+
+      default:
+        return title;
+    }
   }
 }

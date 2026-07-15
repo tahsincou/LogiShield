@@ -115,7 +115,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get carrier => 'কুরিয়ার';
 
   @override
-  String get customerName => 'গ্রাহকের নাম';
+  String get customerName => 'গ্রাহক';
 
   @override
   String get phone => 'ফোন';
@@ -175,11 +175,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get highValueParcel => 'উচ্চমূল্যের COD পার্সেল';
 
   @override
+  String get delete => 'মুছুন';
+
+  @override
   String get deleteParcel => 'পার্সেল মুছুন';
 
   @override
-  String get deleteParcelConfirmation =>
-      'আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?';
+  String get deleteParcelConfirmation => 'আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?';
 
   @override
   String get parcelCreated => 'পার্সেল সফলভাবে তৈরি হয়েছে';
@@ -225,4 +227,73 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get refresh => 'রিফ্রেশ';
+
+  @override
+  String get email => 'ইমেইল';
+
+  @override
+  String get password => 'পাসওয়ার্ড';
+
+  @override
+  String get emailRequired => 'ইমেইল লিখুন';
+
+  @override
+  String get invalidEmail => 'সঠিক ইমেইল লিখুন';
+
+  @override
+  String get passwordRequired => 'পাসওয়ার্ড লিখুন';
+
+  @override
+  String get loginSubtitle => 'দ্রুত ব্যবস্থা নেওয়ার জন্য বিলম্বিত পার্সেল পর্যবেক্ষণ করুন।';
+
+  @override
+  String get loginInstruction => 'চালিয়ে যেতে আপনার অ্যাকাউন্টের তথ্য দিন।';
+
+  @override
+  String get delayedParcelMonitor => 'বিলম্বিত পার্সেল মনিটর';
+
+  @override
+  String get invalidCredentials => 'ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।';
+
+  @override
+  String get requestTimedOut => 'অনুরোধের সময় শেষ হয়েছে। আবার চেষ্টা করুন।';
+
+  @override
+  String get connectionFailed => 'সার্ভারের সঙ্গে সংযোগ করা যায়নি। সংযোগ পরীক্ষা করুন।';
+
+  @override
+  String get genericError => 'কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।';
+
+  @override
+  String get timelineCreated => 'তৈরি হয়েছে';
+
+  @override
+  String get timelinePickedUp => 'সংগ্রহ করা হয়েছে';
+
+  @override
+  String get timelineArrivedAtHub => 'হাবে পৌঁছেছে';
+
+  @override
+  String get timelineOutForDelivery => 'ডেলিভারির জন্য বের হয়েছে';
+
+  @override
+  String get timelineDelivered => 'ডেলিভারি সম্পন্ন';
+
+  @override
+  String get pendingStatus => 'অপেক্ষমাণ';
+
+  @override
+  String get carrierPathao => 'পাঠাও';
+
+  @override
+  String get carrierSteadfast => 'স্টেডফাস্ট';
+
+  @override
+  String get carrierRedX => 'রেডএক্স';
+
+  @override
+  String get carrierECourier => 'ই-কুরিয়ার';
+
+  @override
+  String get carrierPaperfly => 'পেপারফ্লাই';
 }

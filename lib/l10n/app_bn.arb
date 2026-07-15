@@ -54,7 +54,7 @@
 
   "trackingId": "ট্র্যাকিং আইডি",
   "carrier": "কুরিয়ার",
-  "customerName": "গ্রাহকের নাম",
+  "customerName": "গ্রাহক",
   "phone": "ফোন",
   "address": "ঠিকানা",
   "codAmount": "ক্যাশ অন ডেলিভারি",
@@ -96,6 +96,7 @@
   "priority": "অগ্রাধিকার",
   "highValueParcel": "উচ্চমূল্যের COD পার্সেল",
 
+  "delete": "মুছুন",
   "deleteParcel": "পার্সেল মুছুন",
   "deleteParcelConfirmation": "আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?",
   "parcelCreated": "পার্সেল সফলভাবে তৈরি হয়েছে",
@@ -113,5 +114,30 @@
   "offlineMode": "অফলাইন মোড",
   "showingCachedData": "সংরক্ষিত পার্সেল তথ্য দেখানো হচ্ছে",
   "onlineMode": "অনলাইন",
-  "refresh": "রিফ্রেশ"
+  "refresh": "রিফ্রেশ",
+  "email": "ইমেইল",
+  "password": "পাসওয়ার্ড",
+  "emailRequired": "ইমেইল লিখুন",
+  "invalidEmail": "সঠিক ইমেইল লিখুন",
+  "passwordRequired": "পাসওয়ার্ড লিখুন",
+  "loginSubtitle": "দ্রুত ব্যবস্থা নেওয়ার জন্য বিলম্বিত পার্সেল পর্যবেক্ষণ করুন।",
+  "loginInstruction": "চালিয়ে যেতে আপনার অ্যাকাউন্টের তথ্য দিন।",
+  "delayedParcelMonitor": "বিলম্বিত পার্সেল মনিটর",
+  "invalidCredentials": "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।",
+  "requestTimedOut": "অনুরোধের সময় শেষ হয়েছে। আবার চেষ্টা করুন।",
+  "connectionFailed": "সার্ভারের সঙ্গে সংযোগ করা যায়নি। সংযোগ পরীক্ষা করুন।",
+  "genericError": "কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+
+  "timelineCreated": "তৈরি হয়েছে",
+  "timelinePickedUp": "সংগ্রহ করা হয়েছে",
+  "timelineArrivedAtHub": "হাবে পৌঁছেছে",
+  "timelineOutForDelivery": "ডেলিভারির জন্য বের হয়েছে",
+  "timelineDelivered": "ডেলিভারি সম্পন্ন",
+  "pendingStatus": "অপেক্ষমাণ",
+
+  "carrierPathao": "পাঠাও",
+  "carrierSteadfast": "স্টেডফাস্ট",
+  "carrierRedX": "রেডএক্স",
+  "carrierECourier": "ই-কুরিয়ার",
+  "carrierPaperfly": "পেপারফ্লাই"
 }

@@ -55,10 +55,22 @@ class ParcelNotifier extends StateNotifier<ParcelState> {
     bool? delayedOnly,
   }) {
     final query = searchQuery ?? state.searchQuery;
-    final filter = status ?? state.statusFilter;
-    final showDelayedOnly = delayedOnly ?? state.delayedOnly;
 
-    List<Parcel> filtered = List.of(_allParcels);
+    ParcelStatusFilter selectedStatus = status ?? state.statusFilter;
+
+    bool selectedDelayedOnly = delayedOnly ?? state.delayedOnly;
+
+    // Delayed-only selected: clear status filter.
+    if (delayedOnly == true) {
+      selectedStatus = ParcelStatusFilter.all;
+    }
+
+    // Status selected: clear delayed-only filter.
+    if (status != null && status != ParcelStatusFilter.all) {
+      selectedDelayedOnly = false;
+    }
+
+    List<Parcel> filtered = List<Parcel>.from(_allParcels);
 
     if (query.trim().isNotEmpty) {
       final normalizedQuery = query.trim().toLowerCase();
@@ -71,21 +83,21 @@ class ParcelNotifier extends StateNotifier<ParcelState> {
       }).toList();
     }
 
-    if (filter != ParcelStatusFilter.all) {
+    if (selectedStatus != ParcelStatusFilter.all) {
       filtered = filtered.where((parcel) {
-        return parcel.status.name == filter.name;
+        return parcel.status == selectedStatus;
       }).toList();
     }
 
-    if (showDelayedOnly) {
+    if (selectedDelayedOnly) {
       filtered = filtered.where((parcel) => parcel.isDelayed).toList();
     }
 
     state = state.copyWith(
       parcels: filtered,
       searchQuery: query,
-      statusFilter: filter,
-      delayedOnly: showDelayedOnly,
+      statusFilter: selectedStatus,
+      delayedOnly: selectedDelayedOnly,
     );
   }
 

@@ -54,7 +54,7 @@
 
   "trackingId": "Tracking ID",
   "carrier": "Carrier",
-  "customerName": "Customer Name",
+  "customerName": "Customer",
   "phone": "Phone",
   "address": "Address",
   "codAmount": "COD Amount",
@@ -95,7 +95,7 @@
   "noRuleConfigured": "No rule configured",
   "priority": "Priority",
   "highValueParcel": "High-value COD parcel",
-
+  "delete": "Delete",
   "deleteParcel": "Delete Parcel",
   "deleteParcelConfirmation": "Are you sure you want to delete this parcel?",
   "parcelCreated": "Parcel created successfully",
@@ -113,5 +113,30 @@
   "offlineMode": "Offline mode",
   "showingCachedData": "Showing saved parcel data",
   "onlineMode": "Online",
-  "refresh": "Refresh"
+  "refresh": "Refresh",
+  "email": "Email",
+  "password": "Password",
+  "emailRequired": "Email is required",
+  "invalidEmail": "Enter a valid email",
+  "passwordRequired": "Password is required",
+  "loginSubtitle": "Delayed parcel monitoring for faster operational action.",
+  "loginInstruction": "Enter your account details to continue.",
+  "delayedParcelMonitor": "Delayed Parcel Monitor",
+  "invalidCredentials": "Invalid email or password.",
+  "requestTimedOut": "The request timed out. Please try again.",
+  "connectionFailed": "Unable to connect to the server. Check your connection.",
+  "genericError": "Something went wrong. Please try again.",
+
+  "timelineCreated": "Created",
+  "timelinePickedUp": "Picked Up",
+  "timelineArrivedAtHub": "Arrived at Hub",
+  "timelineOutForDelivery": "Out for Delivery",
+  "timelineDelivered": "Delivered",
+  "pendingStatus": "Pending",
+
+  "carrierPathao": "Pathao",
+  "carrierSteadfast": "Steadfast",
+  "carrierRedX": "RedX",
+  "carrierECourier": "eCourier",
+  "carrierPaperfly": "Paperfly"
 }

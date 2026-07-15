@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/core/utils/validators.dart';
+import 'package:logishield/features/logistics/parcel/domain/entities/carrier.dart';
+import 'package:logishield/features/logistics/parcel/domain/entities/carrier_extension.dart';
 import 'package:logishield/features/logistics/parcel/domain/entities/parcel.dart';
 import 'package:logishield/features/logistics/parcel/domain/params/create_parcel.dart';
 import 'package:logishield/features/logistics/parcel/presentation/controllers/create_parcel_form_controller.dart';
@@ -11,6 +13,8 @@ import 'package:logishield/shared/theme/app_spacing.dart';
 import 'package:logishield/shared/widgets/app_button.dart';
 import 'package:logishield/shared/widgets/app_dropdown.dart';
 import 'package:logishield/shared/widgets/app_text_field.dart';
+
+import '../../domain/entities/carrier_parser.dart';
 
 class ParcelFormPage extends ConsumerStatefulWidget {
   const ParcelFormPage({super.key, this.parcel});
@@ -38,7 +42,7 @@ class _ParcelFormPageState extends ConsumerState<ParcelFormPage> {
       form.phoneController.text = parcel.phone;
       form.addressController.text = parcel.address;
       form.codAmountController.text = parcel.codAmount.toString();
-      form.carrier = parcel.carrier;
+      form.carrier = CarrierParser.fromApiValue(parcel.carrier);
     }
   }
 
@@ -76,20 +80,21 @@ class _ParcelFormPageState extends ConsumerState<ParcelFormPage> {
               ),
               const SizedBox(height: AppSpacing.md),
 
-              AppDropdown<String>(
+              AppDropdown<Carrier>(
                 value: form.carrier,
                 label: context.l10n.carrier,
                 items: form.carriers.map((carrier) {
-                  return DropdownMenuItem(value: carrier, child: Text(carrier));
+                  return DropdownMenuItem(
+                    value: carrier,
+                    child: Text(carrier.label(context)),
+                  );
                 }).toList(),
                 onChanged: (value) {
                   setState(() {
                     form.carrier = value;
                   });
                 },
-                validator: (value) {
-                  return Validators.dropdown(value, context.l10n.carrier);
-                },
+                validator: (value) {},
               ),
               const SizedBox(height: AppSpacing.md),
 
@@ -160,7 +165,7 @@ class _ParcelFormPageState extends ConsumerState<ParcelFormPage> {
     if (widget.parcel == null) {
       final request = CreateParcelRequest(
         trackingId: form.trackingIdController.text.trim(),
-        carrier: form.carrier!,
+        carrier: form.carrier!.name,
         customerName: form.customerNameController.text.trim(),
         phone: form.phoneController.text.trim(),
         address: form.addressController.text.trim(),
@@ -174,7 +179,7 @@ class _ParcelFormPageState extends ConsumerState<ParcelFormPage> {
       final updatedParcel = Parcel(
         id: existing.id,
         trackingId: form.trackingIdController.text.trim(),
-        carrier: form.carrier!,
+        carrier: form.carrier!.apiValue,
         customerName: form.customerNameController.text.trim(),
         phone: form.phoneController.text.trim(),
         address: form.addressController.text.trim(),

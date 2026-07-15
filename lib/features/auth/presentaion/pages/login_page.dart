@@ -77,7 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     const SizedBox(height: 12),
 
                     Text(
-                      'Delayed parcel monitoring for faster operational action.',
+                      context.l10n.loginSubtitle,
                       style: theme.textTheme.bodyLarge?.copyWith(
                         color: colors.onSurfaceVariant,
                       ),
@@ -86,17 +86,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                     AppTextField(
                       controller: _emailController,
-                      label: 'Email',
+                      label: context.l10n.email,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       prefixIcon: const Icon(Icons.email_outlined),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Email is required';
+                          return context.l10n.emailRequired;
                         }
 
                         if (!value.contains('@')) {
-                          return 'Enter a valid email';
+                          return context.l10n.invalidEmail;
                         }
 
                         return null;
@@ -107,7 +107,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                     AppTextField(
                       controller: _passwordController,
-                      label: 'Password',
+                      label: context.l10n.password,
                       obscureText: _obscurePassword,
                       textInputAction: TextInputAction.done,
                       onFieldSubmitted: (_) => _login(),
@@ -126,7 +126,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Password is required';
+                          return context.l10n.passwordRequired;
                         }
 
                         return null;
@@ -196,11 +196,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     const SizedBox(height: 24),
 
                     Text(
-                      'LogiShield • Delayed Parcel Monitor',
+                      '${context.l10n.appName} • ${context.l10n.delayedParcelMonitor}',
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colors.onSurfaceVariant,
-                      ),
+                      style: theme.textTheme.bodySmall,
                     ),
                   ],
                 ),
