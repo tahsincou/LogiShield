@@ -9,6 +9,9 @@ import 'package:logishield/shared/widgets/confirmation_dialog.dart';
 import 'package:logishield/features/logistics/parcel/domain/utils/default_delay_rule.dart';
 import 'package:logishield/features/logistics/parcel/domain/utils/delay_engine.dart';
 
+import '../../../../../shared/widgets/app_status_chip.dart';
+import '../../domain/entities/parcel_status.dart';
+
 class ParcelDetailsPage extends ConsumerWidget {
   const ParcelDetailsPage({super.key, required this.parcel});
 
@@ -92,7 +95,9 @@ class ParcelDetailsPage extends ConsumerWidget {
                           const SizedBox(height: 6),
                           Text(parcel.carrier),
                           const SizedBox(height: 8),
-                          _StatusChip(status: parcel.status.name),
+                          AppStatusChip(
+                            status: _formatStatus(context, parcel.status),
+                          ),
                         ],
                       ),
                     ),
@@ -224,6 +229,29 @@ class ParcelDetailsPage extends ConsumerWidget {
   }
 }
 
+String _formatStatus(BuildContext context, ParcelStatusFilter status) {
+  switch (status) {
+    case ParcelStatusFilter.all:
+      return context.l10n.all;
+    case ParcelStatusFilter.pending:
+      return context.l10n.pending;
+    case ParcelStatusFilter.pickedUp:
+      return context.l10n.pickedUp;
+    case ParcelStatusFilter.inTransit:
+      return context.l10n.inTransit;
+    case ParcelStatusFilter.atSortingHub:
+      return context.l10n.sortingHub;
+    case ParcelStatusFilter.outForDelivery:
+      return context.l10n.outForDelivery;
+    case ParcelStatusFilter.delivered:
+      return context.l10n.delivered;
+    case ParcelStatusFilter.returned:
+      return context.l10n.returned;
+    case ParcelStatusFilter.failed:
+      return context.l10n.failed;
+  }
+}
+
 class _Section extends StatelessWidget {
   const _Section({required this.title, required this.children});
 
@@ -266,57 +294,36 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 21),
+          Icon(icon, size: 21, color: colors.onSurfaceVariant),
           const SizedBox(width: 12),
           SizedBox(
             width: 105,
-            child: Text(label, style: TextStyle(color: Colors.grey.shade600)),
+            child: Text(
+              label,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colors.onSurfaceVariant,
+              ),
+            ),
           ),
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colors.onSurface,
+              ),
             ),
           ),
         ],
       ),
     );
-  }
-}
-
-class _StatusChip extends StatelessWidget {
-  const _StatusChip({required this.status});
-
-  final String status;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        _formatStatus(status),
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-      ),
-    );
-  }
-
-  String _formatStatus(String value) {
-    switch (value) {
-      case 'inTransit':
-        return 'In Transit';
-      case 'outForDelivery':
-        return 'Out for Delivery';
-      default:
-        return value;
-    }
   }
 }

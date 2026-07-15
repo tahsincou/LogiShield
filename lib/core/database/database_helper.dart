@@ -14,19 +14,43 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    final path = join(await getDatabasesPath(), 'logistics.db');
+    final path = join(await getDatabasesPath(), 'logishield.db');
 
-    return openDatabase(path, version: 1, onCreate: _onCreate);
+    return openDatabase(
+      path,
+      version: 2,
+      onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
+    );
   }
 
   Future<void> _onCreate(Database db, int version) async {
+    await _createParcelsTable(db);
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute('DROP TABLE IF EXISTS shipments');
+
+      await db.execute('DROP TABLE IF EXISTS parcels');
+
+      await _createParcelsTable(db);
+    }
+  }
+
+  Future<void> _createParcelsTable(Database db) async {
     await db.execute('''
-        CREATE TABLE shipments(
-          trackingId TEXT PRIMARY KEY,
-          customer TEXT,
-          phone TEXT,
-          address TEXT,
-          status TEXT
+      CREATE TABLE parcels(
+        id TEXT PRIMARY KEY,
+        trackingId TEXT NOT NULL,
+        carrier TEXT NOT NULL,
+        customerName TEXT NOT NULL,
+        phone TEXT NOT NULL,
+        address TEXT NOT NULL,
+        codAmount REAL NOT NULL,
+        status TEXT NOT NULL,
+        lastUpdated TEXT NOT NULL,
+        isDelayed INTEGER NOT NULL
       )
     ''');
   }

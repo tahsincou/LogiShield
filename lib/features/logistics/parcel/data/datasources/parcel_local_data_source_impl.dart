@@ -10,7 +10,13 @@ class ParcelLocalDataSourceImpl implements ParcelLocalDataSource {
 
   @override
   Future<List<ParcelModel>> getParcels() async {
-    return [];
+    final db = await databaseHelper.database;
+
+    final rows = await db.query('parcels', orderBy: 'lastUpdated DESC');
+
+    return rows.map((row) {
+      return ParcelModel.fromJson({...row, 'isDelayed': row['isDelayed'] == 1});
+    }).toList();
   }
 
   @override
@@ -21,11 +27,12 @@ class ParcelLocalDataSourceImpl implements ParcelLocalDataSource {
       await txn.delete('parcels');
 
       for (final parcel in parcels) {
-        await txn.insert(
-          'parcels',
-          parcel.toJson(),
-          conflictAlgorithm: ConflictAlgorithm.replace,
-        );
+        final json = parcel.toJson();
+
+        await txn.insert('parcels', {
+          ...json,
+          'isDelayed': parcel.isDelayed ? 1 : 0,
+        }, conflictAlgorithm: ConflictAlgorithm.replace);
       }
     });
   }

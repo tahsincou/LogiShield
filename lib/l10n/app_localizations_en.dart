@@ -178,7 +178,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteParcel => 'Delete Parcel';
 
   @override
-  String get deleteParcelConfirmation => 'Are you sure you want to delete this parcel?';
+  String get deleteParcelConfirmation =>
+      'Are you sure you want to delete this parcel?';
 
   @override
   String get parcelCreated => 'Parcel created successfully';

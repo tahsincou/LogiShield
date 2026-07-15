@@ -178,7 +178,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get deleteParcel => 'পার্সেল মুছুন';
 
   @override
-  String get deleteParcelConfirmation => 'আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?';
+  String get deleteParcelConfirmation =>
+      'আপনি কি নিশ্চিতভাবে এই পার্সেলটি মুছতে চান?';
 
   @override
   String get parcelCreated => 'পার্সেল সফলভাবে তৈরি হয়েছে';
