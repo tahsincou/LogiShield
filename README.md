@@ -2,6 +2,8 @@
 
 **Offline-First Parcel Monitoring System built with Flutter**
 
+![](assets/screenshots/dashboard.png)
+
 LogiShield is a Flutter application for monitoring parcel deliveries, identifying delayed shipments, and managing parcel information. It is built with Clean Architecture and designed as a reusable starter template for logistics applications.
 
 ## Features
@@ -17,6 +19,23 @@ LogiShield is a Flutter application for monitoring parcel deliveries, identifyin
 * English & Bangla Localization
 * Light & Dark Theme
 * Riverpod State Management
+
+
+## Screenshots
+
+| Login | Dashboard |
+|-------|-----------|
+| ![](assets/screenshots/login.png) | ![](assets/screenshots/dashboard.png) |
+
+| Parcel List | Bangla |
+|-------------|----------------|
+| ![](assets/screenshots/parcels.png) | ![](assets/screenshots/settings.png) |
+
+| Bangla |
+|------------|
+| ![](assets/screenshots/bangla.png) |
+
+
 
 ## Tech Stack
 
