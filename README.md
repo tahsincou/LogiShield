@@ -27,7 +27,7 @@ LogiShield is a Flutter application for monitoring parcel deliveries, identifyin
 |-------|-----------|
 | ![](assets/screenshots/login.png) | ![](assets/screenshots/dashboard.png) |
 
-| Parcel List | Bangla |
+| Parcel List | Settings |
 |-------------|----------------|
 | ![](assets/screenshots/parcels.png) | ![](assets/screenshots/settings.png) |
 
