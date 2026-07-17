@@ -5,13 +5,13 @@ import 'package:logishield/features/auth/domain/usecases/login_usecase.dart';
 import 'package:logishield/features/auth/domain/usecases/logout_usecase.dart';
 
 final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
-  return LoginUseCase(ref.read(authRepositoryProvider));
+  return LoginUseCase(ref.watch(authRepositoryProvider));
 });
 
 final checkLoginUseCaseProvider = Provider<CheckLoginUseCase>((ref) {
-  return CheckLoginUseCase(ref.read(authRepositoryProvider));
+  return CheckLoginUseCase(ref.watch(authRepositoryProvider));
 });
 
 final logoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
-  return LogoutUseCase(ref.read(authRepositoryProvider));
+  return LogoutUseCase(ref.watch(authRepositoryProvider));
 });

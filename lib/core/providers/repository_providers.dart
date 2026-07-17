@@ -7,15 +7,14 @@ import 'package:logishield/features/logistics/parcel/domain/repository/parcel_re
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepositoryImpl(
-    ref.read(authRemoteDataSourceProvider),
-    ref.read(secureStorageServiceProvider),
+    ref.watch(authRemoteDataSourceProvider),
+    ref.watch(secureStorageServiceProvider),
   );
 });
 
-//Parcels
 final parcelRepositoryProvider = Provider<ParcelRepository>((ref) {
   return ParcelRepositoryImpl(
-    remote: ref.read(parcelRemoteDataSourceProvider),
-    local: ref.read(parcelLocalDataSourceProvider),
+    remote: ref.watch(parcelRemoteDataSourceProvider),
+    local: ref.watch(parcelLocalDataSourceProvider),
   );
 });

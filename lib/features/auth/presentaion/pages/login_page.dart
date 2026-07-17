@@ -5,6 +5,8 @@ import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/shared/theme/app_spacing.dart';
 import 'package:logishield/shared/widgets/app_button.dart';
 import 'package:logishield/shared/widgets/app_text_field.dart';
+import '../../../../shared/widgets/environment_badge.dart';
+import '../../../../shared/widgets/environment_bottom_sheet.dart';
 import '../providers/auth_notifier.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -17,7 +19,7 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _emailController = TextEditingController(text: "demo@logishield.com");
+  final _emailController = TextEditingController(text: "tahsincou@gmail.com");
 
   final _passwordController = TextEditingController(text: "password");
 
@@ -176,23 +178,24 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       onPressed: _login,
                     ),
 
-                    // const SizedBox(height: 28),
+                    const SizedBox(height: 28),
 
-                    // Center(
-                    //   child: EnvironmentBadge(
-                    //     onLongPress: () async {
-                    //       final changed = await showEnvironmentBottomSheet(
-                    //         context,
-                    //       );
+                    Center(
+                      child: EnvironmentBadge(
+                        onPress: () async {
+                          final changed = await showEnvironmentBottomSheet(
+                            context,
+                            ref,
+                          );
 
-                    //       if (!context.mounted) return;
+                          if (!context.mounted) return;
 
-                    //       if (changed == true) {
-                    //         context.go('/splash');
-                    //       }
-                    //     },
-                    //   ),
-                    // ),
+                          if (changed == true && context.mounted) {
+                            context.go('/splash');
+                          }
+                        },
+                      ),
+                    ),
                     const SizedBox(height: 24),
 
                     Text(

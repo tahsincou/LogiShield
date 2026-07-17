@@ -4,9 +4,10 @@ import 'package:logishield/core/config/environment.dart';
 import 'package:logishield/core/locale/locale_extension.dart';
 import 'package:logishield/shared/theme/app_text_styles.dart';
 
+import '../../core/providers/network_providers.dart';
 import '../theme/app_spacing.dart';
 
-Future<bool?> showEnvironmentBottomSheet(BuildContext context) async {
+Future<bool?> showEnvironmentBottomSheet(BuildContext context, ref) async {
   Environment selected = AppConfig.environment;
   final availableEnvironments = [
     Environment.demo,
@@ -50,6 +51,8 @@ Future<bool?> showEnvironmentBottomSheet(BuildContext context) async {
                     onPressed: () async {
                       if (selected != AppConfig.environment) {
                         await AppConfig.changeEnvironment(selected);
+
+                        ref.invalidate(dioProvider);
 
                         if (context.mounted) {
                           Navigator.pop(context, true);

@@ -3,14 +3,14 @@ import 'package:logishield/shared/theme/app_text_styles.dart';
 import '../../core/config/app_config.dart';
 
 class EnvironmentBadge extends StatelessWidget {
-  final VoidCallback onLongPress;
+  final VoidCallback onPress;
 
-  const EnvironmentBadge({super.key, required this.onLongPress});
+  const EnvironmentBadge({super.key, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: onLongPress,
+      onTap: onPress,
       child: Text(
         AppConfig.isDemo ? '🟠 Demo Mode' : '🟢 Live Mode',
         style: AppTextStyles.body,

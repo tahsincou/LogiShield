@@ -11,14 +11,11 @@ import 'package:logishield/features/logistics/parcel/data/datasources/parcel_rem
 
 //Auth
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
-  return AuthRemoteDataSourceImpl(ref.read(apiClientProvider));
+  return AuthRemoteDataSourceImpl(ref.watch(apiClientProvider));
 });
-
 //Parcels
 final parcelRemoteDataSourceProvider = Provider<ParcelRemoteDataSource>((ref) {
-  final apiClient = ref.read(apiClientProvider);
-
-  return ParcelRemoteDataSource(apiClient);
+  return ParcelRemoteDataSource(ref.watch(apiClientProvider));
 });
 
 final parcelLocalDataSourceProvider = Provider<ParcelLocalDataSource>((ref) {

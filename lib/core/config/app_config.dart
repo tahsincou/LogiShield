@@ -1,4 +1,5 @@
 import 'package:logishield/core/config/environment.dart';
+import 'package:logishield/core/config/supabse_config.dart';
 
 import '../services/environment_service.dart';
 
@@ -21,13 +22,13 @@ class AppConfig {
   static String get baseUrl {
     switch (_environment) {
       case Environment.demo:
-        return 'http://192.168.0.16:3001';
+        return 'http://192.168.1.105:3001';
 
       case Environment.development:
         return 'https://dev-api.company.com';
 
       case Environment.staging:
-        return 'https://staging-api.company.com';
+        return '${SupabaseConfig.url}/rest/v1';
 
       case Environment.production:
         return 'https://api.company.com';

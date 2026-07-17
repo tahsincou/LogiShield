@@ -8,17 +8,17 @@ import 'package:logishield/features/logistics/parcel/domain/usecases/update_parc
 final getRecentParcelsUseCaseProvider = Provider<GetRecentParcelsUseCase>((
   ref,
 ) {
-  return GetRecentParcelsUseCase(ref.read(parcelRepositoryProvider));
+  return GetRecentParcelsUseCase(ref.watch(parcelRepositoryProvider));
 });
 
 final createparcelUseCaseProvider = Provider<CreateParcelUseCase>((ref) {
-  return CreateParcelUseCase(ref.read(parcelRepositoryProvider));
+  return CreateParcelUseCase(ref.watch(parcelRepositoryProvider));
 });
 
 final updateparcelUseCaseProvider = Provider<UpdateParcelUseCase>((ref) {
-  return UpdateParcelUseCase(ref.read(parcelRepositoryProvider));
+  return UpdateParcelUseCase(ref.watch(parcelRepositoryProvider));
 });
 
 final deleteparcelUseCaseProvider = Provider<DeleteParcelUseCase>((ref) {
-  return DeleteParcelUseCase(ref.read(parcelRepositoryProvider));
+  return DeleteParcelUseCase(ref.watch(parcelRepositoryProvider));
 });
