@@ -1,124 +1,59 @@
-# LogiSheild
+# LogiShield
 
-Logistics app to detect delayed parcel monitor from multiu couriers
+**Offline-First Parcel Monitoring System built with Flutter**
 
----
+LogiShield is a Flutter application for monitoring parcel deliveries, identifying delayed shipments, and managing parcel information. It is built with Clean Architecture and designed as a reusable starter template for logistics applications.
 
 ## Features
 
+* JWT Authentication
+* Environment Switching (Demo / Staging)
+* Node.js Mock Server & Supabase Backend
+* Offline Support (SQLite)
+* Parcel CRUD
+* Dashboard Analytics
+* Search & Filters
+* Parcel Timeline
+* English & Bangla Localization
+* Light & Dark Theme
+* Riverpod State Management
+
+## Tech Stack
+
+* Flutter & Dart
+* Riverpod
 * Clean Architecture
-* Feature-first structure
-* Riverpod state management
-* GoRouter navigation
-* Dio networking
-* Offline-first foundation (SQLite)
-* Authentication structure
-* Environment switching (Demo / Live)
-* Light / Dark / System theme
-* Localization (English / Bangla)
-* Shared UI components
-* Responsive design foundation
-* Android, iOS, Web, Windows, Linux & macOS support
+* Dio
+* SQLite
+* Supabase
+* Node.js
+* JWT Authentication
 
----
+## Screenshots
 
-## Getting Started
+* Login
+* Dashboard
+* Parcel List
+* Parcel Details
+* Create Parcel
+* Settings
+* Dark Theme
+* Bangla Language
 
-Clone the repository:
-
-```bash
-git clone <repository-url>
-cd logishield
-```
-
-Run the setup:
-
-```bash
-make setup
-```
-
-The setup script will configure:
-
-* Project name
-* Application name
-* Android/iOS package name (Bundle ID)
-
-Then install dependencies and run the project:
+## Run
 
 ```bash
 flutter pub get
 flutter run
 ```
 
----
+For Demo mode, start the Node.js mock server.
 
-## Development Commands
+For Staging mode, configure your Supabase credentials in `supabase_config.dart` and select **Staging** from the login screen.
 
-Run the application:
+## Future Improvements
 
-```bash
-make run
-```
-
-Analyze the project:
-
-```bash
-make analyze
-```
-
-Format the project:
-
-```bash
-make format
-```
-
-Clean the project:
-
-```bash
-make clean
-```
-
----
-
-## Project Structure
-
-```text
-lib/
-├── core/          # Shared infrastructure
-├── features/      # Business features
-├── shared/        # Reusable widgets
-└── l10n/          # Localization
-```
-
----
-
-## Building a New App
-
-1. Clone the template.
-2. Run `make setup`.
-3. Create your first feature.
-4. Remove or replace the sample Shipment feature.
-5. Build your application.
-
-The template already provides the common infrastructure required by most Flutter applications, allowing you to focus only on business logic.
-
----
-
-## Included Infrastructure
-
-* Authentication
-* API Client
-* Environment Management
-* Offline Storage
-* Navigation
-* Theme Management
-* Localization
-* Shared Widgets
-* Error Handling
-* Repository Pattern
-
----
-
-## License
-
-Released under the MIT License.
+* OCR Parcel Label Scanner
+* Barcode / QR Scanning
+* Push Notifications
+* Parcel Delay Prediction
