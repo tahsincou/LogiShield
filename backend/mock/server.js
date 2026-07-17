@@ -9,7 +9,7 @@ const router = jsonServer.router(
 
 const middlewares = jsonServer.defaults();
 
-const PORT = 3000;
+const PORT = 3001;
 const JWT_SECRET = 'logishield-demo-secret';
 
 server.use(middlewares);
